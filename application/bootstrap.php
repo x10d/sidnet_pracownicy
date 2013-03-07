@@ -22,7 +22,7 @@ else
  * @link http://kohanaframework.org/guide/using.configuration
  * @link http://www.php.net/manual/timezones
  */
-date_default_timezone_set('America/Chicago');
+date_default_timezone_set('Europe/Warsaw');
 
 /**
  * Set the default locale.
@@ -30,7 +30,7 @@ date_default_timezone_set('America/Chicago');
  * @link http://kohanaframework.org/guide/using.configuration
  * @link http://www.php.net/manual/function.setlocale
  */
-setlocale(LC_ALL, 'en_US.utf-8');
+setlocale(LC_ALL, 'pl_PL.utf-8');
 
 /**
  * Enable the Kohana auto-loader.
@@ -91,6 +91,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/kohana.sidnet/',
+	'index_file' => '',
 ));
 
 /**
