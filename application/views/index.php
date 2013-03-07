@@ -16,3 +16,4 @@
     </tr>
 <?php endforeach; ?>
 </table>
+<?php echo HTML::anchor('pracownicy/add','Dodaj pracownika') ?>
