@@ -14,10 +14,30 @@ class Controller_Pracownicy extends Controller_Base {
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
             $modelPracownicy->add($_POST);
-	    $this->redirect('pracownicy');
+	    $this->redirect('/');
         }
 	$this->template->content = View::factory('add');
     }    
+    public function action_edit(){
+	$id = $this->request->param('id');
+	$modelPracownicy = new Model_Pracownicy();
+	$pracownicy = $modelPracownicy->get($id);
+	
+	if($this->request->post()){
+	    $modelPracownicy->update($id,$_POST);
+	    $pracownicy=$_POST;
+	    $this->redirect('/');
+	}
+	
+	$this->template->content = View::factory('edit')->set('pracownicy',$pracownicy);
+    }
+
+    public function action_delete(){     
+	$id = $this->request->param('id');
+	$modelPracownicy = new Model_Pracownicy();
+	$modelPracownicy->delete($id);
+	$this->redirect('/');
+    }
     public function after(){        
         parent::after();
     }    

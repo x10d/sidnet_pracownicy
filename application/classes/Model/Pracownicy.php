@@ -17,4 +17,29 @@ Class Model_Pracownicy extends Kohana_Model
                     ->as_array();
         return $result;
     }    
+
+    public function delete($id){
+	$result = DB::delete('pracownicy')
+		->where('id', '=', $id)
+		->execute();       
+    }
+
+    public function get($id){
+	    $result = DB::select('*')
+		->from('pracownicy')
+		->where('id', '=', $id)
+		->execute()
+		->current();
+	    
+	    return $result;
+    }
+
+    public function update($id,$pracownicy){
+	    $result = DB::update('pracownicy')
+		->set($pracownicy)
+		->where('id', '=', $id)
+		->execute();
+	    
+	    return $result;
+    }
 }

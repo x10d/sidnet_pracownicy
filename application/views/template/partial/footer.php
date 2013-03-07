@@ -1,1 +1,2 @@
-<p>jakas tam stopka</p>
+<hr>
+<p>2013 ® x10d</p>
