@@ -13,10 +13,17 @@ class Controller_Pracownicy extends Controller_Base {
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
-            $modelPracownicy->add($_POST);
-	    $this->redirect('/');
+            $validate = $this->checkData($_POST);
+       
+            if($validate->check()){
+		$modelPracownicy->add($_POST);
+		$this->redirect('/');
+            } else {                
+                $error = $validate->errors('msg');
+            }
+
         }
-	$this->template->content = View::factory('add');
+	$this->template->content = View::factory('add')->bind('error',$error);
     }    
     public function action_edit(){
 	$id = $this->request->param('id');
@@ -24,12 +31,19 @@ class Controller_Pracownicy extends Controller_Base {
 	$pracownicy = $modelPracownicy->get($id);
 	
 	if($this->request->post()){
-	    $modelPracownicy->update($id,$_POST);
-	    $pracownicy=$_POST;
-	    $this->redirect('/');
+
+	  $validate = $this->checkData($_POST);
+
+            if($validate->check()){
+		$modelPracownicy->update($id,$_POST);
+		$this->redirect('/');
+            } else {
+                $error = $validate->errors('msg');
+		$pracownicy=$_POST;
+            }
 	}
 	
-	$this->template->content = View::factory('edit')->set('pracownicy',$pracownicy);
+	$this->template->content = View::factory('edit')->set('pracownicy',$pracownicy)->bind('error',$error);
     }
 
     public function action_delete(){     
@@ -40,5 +54,18 @@ class Controller_Pracownicy extends Controller_Base {
     }
     public function after(){        
         parent::after();
-    }    
+    }
+
+    public function checkData($POST)
+    {
+        $validate = new Validation($POST);
+
+        $validate->rule('imie', 'not_empty') 
+                 ->rule('nazwisko', 'not_empty')
+                 ->rule('stanowisko', 'not_empty')
+                 ->rule('pesel', 'not_empty')
+                 ->rule('pesel', 'numeric')
+                 ->rule('pesel','exact_length', array(':value', 11));
+        return $validate;
+    }
 }
