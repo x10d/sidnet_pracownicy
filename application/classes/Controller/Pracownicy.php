@@ -3,7 +3,11 @@
 class Controller_Pracownicy extends Controller_Base {
 
     public function before(){
-        parent::before();        
+        parent::before();
+
+        # dostęp do kontrolera Pracownicy wyłącznie po zalogowaniu
+        $user = Auth::instance()->get_user(); // pobieranie danych usera
+        if (!$user) $this->redirect('/zaloguj'); // jesli nie jest zalogowany - do logowania        
     }
     public function action_index(){
         $modelPracownicy = new Model_Pracownicy();

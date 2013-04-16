@@ -9,4 +9,5 @@
 	<dt></dt>
 	<dd><?php echo Form::submit('submit', 'dodaj') ?></dd>
 </dl>
+<p>Jeśli nie posiadasz konta - <?php echo HTML::anchor('zarejestruj','zarejestruj się') ?>
 <?php echo Form::close() ?>
