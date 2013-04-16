@@ -36,7 +36,18 @@ class Controller_Auth extends Controller_Base {
             $this->redirect('/');
         }
         $this->template->content = View::factory('register'); 
-   }
+    }
+
+    public function action_password() {
+        $user = Auth::instance()->get_user(); // pobieranie danych usera
+        if (!$user) $this->redirect('/zaloguj'); // jesli nie jest zalogowany - do logowania
+        if (isset($_POST['submit'])) {
+            $user->password = Arr::get($this->request->post(), 'password');
+            $user->save();
+            $this->redirect('/');
+        }
+        $this->template->content = View::factory('password');
+    }
 
     public function after() {
         parent::after();

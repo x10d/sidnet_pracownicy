@@ -171,3 +171,6 @@
 #5 /var/www/sidnet_pracownicy/system/classes/Kohana/Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #6 /var/www/sidnet_pracownicy/index.php(118): Kohana_Request->execute()
 #7 {main} in /var/www/sidnet_pracownicy/application/classes/Controller/Auth.php:17
+2013-04-16 15:22:07 --- EMERGENCY: ErrorException [ 1 ]: Cannot use object of type Model_User as array ~ APPPATH/classes/Controller/Auth.php [ 43 ] in :
+2013-04-16 15:22:07 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in :

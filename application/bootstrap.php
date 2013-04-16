@@ -136,6 +136,12 @@ Route::set('logout', 'wyloguj')
 		'action'     => 'logout'
 	));
 
+Route::set('password', 'haslo')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'password'
+	));
+
 Route::set('register', 'zarejestruj')
 	->defaults(array(
 		'controller' => 'auth',

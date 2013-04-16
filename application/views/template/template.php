@@ -17,6 +17,7 @@
             <div id = "menu">
                 <?php if (Auth::instance()->logged_in()) { ?>
                     <span><?php echo HTML::anchor('wyloguj','Wyloguj się') ?></span>
+                    <span><?php echo HTML::anchor('haslo','Zmień hasło') ?></span>
                 <?php } else { ?>
                     <span>
                         <?php echo HTML::anchor('zaloguj','Zaloguj się') ?>
