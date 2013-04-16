@@ -1,0 +1,7 @@
+# Ignore configuration files that may contain sensitive information.
+/.htaccess
+application/config/*
+!application/config/*-example*
+
+# Ignore all ~ files
+*~
