@@ -124,6 +124,18 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('login', 'zaloguj')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'login'
+	));
+
+Route::set('logout', 'wyloguj')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'logout'
+	));
+
 Route::set('register', 'zarejestruj')
 	->defaults(array(
 		'controller' => 'auth',

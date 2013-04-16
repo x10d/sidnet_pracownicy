@@ -9,9 +9,12 @@ class Controller_Auth extends Controller_Base {
     public function action_login() {
         if(isset($_POST['submit'])){
             $r = Auth::instance()->login($_POST['email'], $_POST['password']);
-            $this->redirect('/');
+            if ($r) {
+                $this->redirect('/');
+            }
+            $error = 'Niepoprawne dane logowania!';
         }
-        $this->template->content = View::factory('login');
+        $this->template->content = View::factory('login')->bind('error', $error);
     }
 
     public function action_logout() {

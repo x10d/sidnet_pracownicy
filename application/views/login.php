@@ -1,5 +1,6 @@
 <h2>Zaloguj</h2>
 <?php echo Form::open() ?>
+<?php if ($error) echo $error; ?>
 <dl>
 	<dt>E-mail:</dt>
 	<dd><?php echo Form::input('email', (isset($_POST['email']))?$_POST['email']:''); ?></dd>

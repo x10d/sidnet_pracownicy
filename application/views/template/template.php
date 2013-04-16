@@ -14,6 +14,16 @@
             <div id = "header">
                 <?php if(isset($header)) echo $header ?>
             </div>
+            <div id = "menu">
+                <?php if (Auth::instance()->logged_in()) { ?>
+                    <span><?php echo HTML::anchor('wyloguj','Wyloguj się') ?></span>
+                <?php } else { ?>
+                    <span>
+                        <?php echo HTML::anchor('zaloguj','Zaloguj się') ?>
+                        <?php echo HTML::anchor('zarejestruj','Zarejestruj się') ?>
+                    </span>
+                <?php } ?>
+            </div>
             <div id = "content">
                 <?php if(isset($content)) echo $content ?>
             </div>
