@@ -4,7 +4,7 @@ return array(
 
     'driver'       => 'ORM',
     'hash_method'  => 'sha256',
-    'hash_key'     => hash_hmac('sha256', 'SDF@#FSDFS@SDGTS_msg', 'asdfasdfaswy_key'),
+    'hash_key'     => hash_hmac('sha256', 'message', 'secret_key'),
     'lifetime'     => 1209600,
     'session_key'  => 'auth_user',
  

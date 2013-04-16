@@ -18,10 +18,10 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'djek.toya.net.pl',
-			'database'   => 'sidnet_kohana',
-			'username'   => 'sidnet',
-			'password'   => 'sidnetpass',
+			'hostname'   => 'hostname',
+			'database'   => 'database',
+			'username'   => 'username',
+			'password'   => 'password',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
