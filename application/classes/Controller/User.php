@@ -18,10 +18,13 @@ class Controller_User extends Controller_Base {
             );
             if ($loginCheck) {
                 $this->redirect('/');
+            } else {
+                $error['email'] = 'Login lub/i hasło niepoprawne';
             }
-            $error = 'Niepoprawne dane logowania!';
+        } else {
+            $error = $validate->errors('msg');
         }
-        $this->template->content = View::factory('login');
+        $this->template->content = View::factory('login')->bind('error', $error);
     }
 
     public function action_logout() {
@@ -49,8 +52,9 @@ class Controller_User extends Controller_Base {
                 $user->add('roles', $role);
                 $user->save();
                 $this->redirect('/');
+            } else {
+                $error = $validate->errors('msg');
             }
-            $error = 'Pola nie są poprawnie wypełnione';
         }
         $this->template->content = View::factory('register')->bind('error', $error);
     }
@@ -62,24 +66,28 @@ class Controller_User extends Controller_Base {
             $this->redirect('/zaloguj');
         }
 
-        $validate = Validation::factory($this->request->post())
-            ->rule('oldpassword', 'not_empty')
-            ->rule('password', 'not_empty')
-            ->rule(
-                'passwordchecker',
-                'matches',
-                array(':validation', 'passwordchecker', 'password')
-            );
-        if ($validate->check()) {
-            $hashedPassword = $this->auth->hash_password(
-                Arr::get($this->request->post(), 'oldpassword')
-            );
-            if ($user->password == $hashedPassword) {
-                $user->password = Arr::get($this->request->post(), 'password');
-                $user->save();
-                $this->redirect('/');                    
+        if (Arr::get($this->request->post(), 'submit')) {
+            $validate = Validation::factory($this->request->post())
+                ->rule('oldpassword', 'not_empty')
+                ->rule('password', 'not_empty')
+                ->rule(
+                    'passwordchecker',
+                    'matches',
+                    array(':validation', 'passwordchecker', 'password')
+                );
+            if ($validate->check()) {
+                $hashedPassword = $this->auth->hash_password(
+                    Arr::get($this->request->post(), 'oldpassword')
+                );
+                if ($user->password == $hashedPassword) {
+                    $user->password = Arr::get($this->request->post(), 'password');
+                    $user->save();
+                    $this->redirect('/');                    
+                }
+                $error['oldpassword'] = 'Stare hasło nie jest poprawne';
+            } else {
+                $error = $validate->errors('msg');
             }
-            $error = 'Stare hasło nie jest poprawne';
         }
         $this->template->content = View::factory('password')->bind('error', $error);
     }
