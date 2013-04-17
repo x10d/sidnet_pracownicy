@@ -126,25 +126,25 @@ Kohana::modules(array(
 
 Route::set('login', 'zaloguj')
 	->defaults(array(
-		'controller' => 'auth',
+		'controller' => 'user',
 		'action'     => 'login'
 	));
 
 Route::set('logout', 'wyloguj')
 	->defaults(array(
-		'controller' => 'auth',
+		'controller' => 'user',
 		'action'     => 'logout'
 	));
 
 Route::set('password', 'haslo')
 	->defaults(array(
-		'controller' => 'auth',
+		'controller' => 'user',
 		'action'     => 'password'
 	));
 
 Route::set('register', 'zarejestruj')
 	->defaults(array(
-		'controller' => 'auth',
+		'controller' => 'user',
 		'action'     => 'register'
 	));
 
