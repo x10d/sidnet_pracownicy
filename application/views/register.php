@@ -1,9 +1,14 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#register").validate();
+	});
+</script>
 <h2>Dodaj użytkownika</h2>
-<?php echo Form::open() ?>
+<?php echo Form::open('', array('id' => 'register')) ?>
 <dl>
-	<dt>E-mail:</dt>
+	<dt><label for="email">E-mail:</label></dt>
 	<dd>
-		<?php echo Form::input('email', (isset($_POST['email']))?$_POST['email']:''); ?>
+		<?php echo Form::input('email', (isset($_POST['email']))?$_POST['email']:'', array('id' => 'email', 'class' => 'required email')); ?>
 		<span style="color:red"><?php if(isset($error['email'])) echo $error['email']; ?></span>
 	</dd>
 	<dt>Imię i nazwisko:</dt>

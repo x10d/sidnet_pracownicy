@@ -11,8 +11,8 @@ class Controller_Base extends Controller_Template {
     {
         parent::before();
         $this->_title = 'Sidnet - lista pracowników';
-        $this->__JS__ = 'public/js/';
-        $this->__CSS__= 'public/css/';
+        $this->__JS__ = 'themes/assets/js/';
+        $this->__CSS__= 'themes/assets/css/';
 
         $this->auth = Auth::instance();
         $this->user = $this->auth->get_user();
@@ -29,6 +29,8 @@ class Controller_Base extends Controller_Template {
     public function after()
     {
         $_script = array(
+            $this->__JS__.'jquery-1.9.1.min.js',
+            $this->__JS__.'jquery.validate.js'
         );
 
         $_style = array(

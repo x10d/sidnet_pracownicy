@@ -2,12 +2,14 @@
     <head>
         <title><?php if(isset($_title)) echo $_title; ?></title>
         <?php
-        foreach ($script as $key => $value)
-            echo Html::script($value);
-
-        foreach ($style as $key => $value)
-            echo Html::style($value);
-        ?>
+            foreach ($script as $key => $value) {
+                echo HTML::script($value);
+            }
+                
+            foreach ($style as $key => $value) {
+                echo HTML::style($value);
+            }
+            ?>
     </head>
     <body>
         <div id = "box">
