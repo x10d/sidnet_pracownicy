@@ -1,5 +1,5 @@
 <h2>Zaloguj</h2>
-<?php if ($error) echo $error; ?>
+<?php if (isset($error)) echo $error; ?>
 <?php echo Form::open() ?>
 <dl>
 	<dt>E-mail:</dt>
