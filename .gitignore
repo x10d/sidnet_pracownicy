@@ -5,3 +5,6 @@ application/config/*
 
 # Ignore all ~ files
 *~
+
+# Ignore log files
+application/logs/*

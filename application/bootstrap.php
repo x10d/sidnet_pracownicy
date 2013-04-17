@@ -123,6 +123,31 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('login', 'zaloguj')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'login'
+	));
+
+Route::set('logout', 'wyloguj')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'logout'
+	));
+
+Route::set('password', 'haslo')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'password'
+	));
+
+Route::set('register', 'zarejestruj')
+	->defaults(array(
+		'controller' => 'auth',
+		'action'     => 'register'
+	));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'pracownicy',

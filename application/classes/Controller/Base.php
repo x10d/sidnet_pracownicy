@@ -12,7 +12,18 @@ class Controller_Base extends Controller_Template {
         parent::before();
         $this->_title = 'Sidnet - lista pracowników';
         $this->__JS__ = 'public/js/';
-        $this->__CSS__= 'public/css/'; 
+        $this->__CSS__= 'public/css/';
+
+        $this->auth = Auth::instance();
+        $this->user = $this->auth->get_user();
+        View::bind_global('auth', $this->auth);
+        View::bind_global('user', $this->user);
+        
+        $is_logged = $this->auth->logged_in();
+        View::bind_global('is_logged', $is_logged);
+        $this->auth_data = array(
+            'is_logged' => $is_logged
+        );
     }
     
     public function after()
