@@ -1,5 +1,4 @@
 <h2>Dodaj użytkownika</h2>
-<?php if ($error) echo $error; ?>
 <?php echo Form::open() ?>
 <dl>
 	<dt>E-mail:</dt>
