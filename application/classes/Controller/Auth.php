@@ -12,8 +12,11 @@ class Controller_Auth extends Controller_Base {
             ->rule('email', 'not_empty')
             ->rule('password', 'not_empty');
         if ($validate->check()) {
-            $r = Auth::instance()->login(Arr::get($this->request->post(), 'email'), Arr::get($this->request->post(), 'password'));
-            if ($r) {
+            $loginCheck = Auth::instance()->login(
+                Arr::get($this->request->post(), 'email'),
+                Arr::get($this->request->post(), 'password')
+            );
+            if ($loginCheck) {
                 $this->redirect('/');
             }
             $error = 'Niepoprawne dane logowania!';
@@ -33,7 +36,9 @@ class Controller_Auth extends Controller_Base {
                 ->rule('email', 'email')
                 ->rule('username', 'not_empty')
                 ->rule('password', 'not_empty')
-                ->rule('passwordchecker',  'matches', array(':validation', 'passwordchecker', 'password'));
+                ->rule('passwordchecker', 'matches', array(
+                    ':validation', 'passwordchecker', 'password')
+                );
             if ($validate->check()) {
                 $user = ORM::factory('User');
                 $user->email = Arr::get($this->request->post(), 'email');
@@ -51,14 +56,25 @@ class Controller_Auth extends Controller_Base {
     }
 
     public function action_password() {
-        $user = $this->auth->get_user(); // pobieranie danych usera
-        if (!$user) $this->redirect('/zaloguj'); // jesli nie jest zalogowany - do logowania
+        $user = $this->auth->get_user();
+
+        if (!$user) {
+            $this->redirect('/zaloguj');
+        }
+
         $validate = Validation::factory($this->request->post())
             ->rule('oldpassword', 'not_empty')
             ->rule('password', 'not_empty')
-            ->rule('passwordchecker',  'matches', array(':validation', 'passwordchecker', 'password'));
+            ->rule(
+                'passwordchecker',
+                'matches',
+                array(':validation', 'passwordchecker', 'password')
+            );
         if ($validate->check()) {
-            if ($user->password == $this->auth->hash_password(Arr::get($this->request->post(), 'oldpassword'))) {
+            $hashedPassword = $this->auth->hash_password(
+                Arr::get($this->request->post(), 'oldpassword')
+            );
+            if ($user->password == $hashedPassword) {
                 $user->password = Arr::get($this->request->post(), 'password');
                 $user->save();
                 $this->redirect('/');                    
@@ -72,4 +88,3 @@ class Controller_Auth extends Controller_Base {
         parent::after();
     }
 }
-    
