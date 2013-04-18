@@ -30,7 +30,8 @@ class Controller_Base extends Controller_Template {
     {
         $_script = array(
             $this->__JS__.'jquery-1.9.1.min.js',
-            $this->__JS__.'jquery.validate.js'
+            $this->__JS__.'jquery.validate.js',
+            $this->__JS__.'myScripts.js'
         );
 
         $_style = array(

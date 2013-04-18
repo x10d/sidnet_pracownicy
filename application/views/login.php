@@ -1,17 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#loginForm").validate({
-			messages: {
-				email: {
-					required: 'Pole nie może pozostać puste',
-					email: 'Pole musi zawierać prawidłowy adres mailowy'
-				},
-				password: {
-					required: 'Pole nie może pozostać puste'
-				}
-			}
-
-		});
+		xValidateForm('#loginForm');
 	});
 </script>
 <h2>Zaloguj</h2>

@@ -1,23 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#registerForm").validate({
-			messages: {
-				email: {
-					required: 'Pole nie może pozostać puste',
-					email: 'Pole musi zawierać prawidłowy adres mailowy'
-				},
-				username: {
-					required: 'Pole nie może pozostać puste'
-				},
-				password: {
-					required: 'Pole nie może pozostać puste'
-				},
-				passwordchecker: {
-					required: 'Pole nie może pozostać puste'
-				}
-			}
-
-		});
+		xValidateForm('#registerForm');
 	});
 </script>
 <h2>Dodaj użytkownika</h2>

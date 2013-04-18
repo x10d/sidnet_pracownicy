@@ -1,19 +1,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#changePasswordForm").validate({
-			messages: {
-				oldpassword: {
-					required: 'Pole nie może pozostać puste'
-				},
-				password: {
-					required: 'Pole nie może pozostać puste'
-				},
-				passwordchecker: {
-					required: 'Pole nie może pozostać puste'
-				}
-			}
-
-		});
+		xValidateForm('#changePasswordForm');
 	});
 </script>
 <h2>Zmiana hasła</h2>
