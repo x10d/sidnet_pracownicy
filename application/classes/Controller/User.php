@@ -7,22 +7,24 @@ class Controller_User extends Controller_Base {
     }
 
     public function action_login() {
-        $validate = Validation::factory($this->request->post())
-            ->rule('email', 'email')
-            ->rule('email', 'not_empty')
-            ->rule('password', 'not_empty');
-        if ($validate->check()) {
-            $loginCheck = Auth::instance()->login(
-                Arr::get($this->request->post(), 'email'),
-                Arr::get($this->request->post(), 'password')
-            );
-            if ($loginCheck) {
-                $this->redirect('/');
+        if (Arr::get($this->request->post(), 'submit')) {
+            $validate = Validation::factory($this->request->post())
+                ->rule('email', 'email')
+                ->rule('email', 'not_empty')
+                ->rule('password', 'not_empty');
+            if ($validate->check()) {
+                $loginCheck = Auth::instance()->login(
+                    Arr::get($this->request->post(), 'email'),
+                    Arr::get($this->request->post(), 'password')
+                );
+                if ($loginCheck) {
+                    $this->redirect('/');
+                } else {
+                    $error['email'] = 'Login lub/i hasło niepoprawne';
+                }
             } else {
-                $error['email'] = 'Login lub/i hasło niepoprawne';
+                $error = $validate->errors('msg');
             }
-        } else {
-            $error = $validate->errors('msg');
         }
         $this->template->content = View::factory('login')->bind('error', $error);
     }
