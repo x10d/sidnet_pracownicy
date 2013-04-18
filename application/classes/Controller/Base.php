@@ -11,24 +11,27 @@ class Controller_Base extends Controller_Template {
     {
         parent::before();
         $this->_title = 'Sidnet - lista pracowników';
-        $this->__JS__ = 'public/js/';
-        $this->__CSS__= 'public/css/';
+        $this->__JS__ = 'themes/assets/js/';
+        $this->__CSS__= 'themes/assets/css/';
 
         $this->auth = Auth::instance();
         $this->user = $this->auth->get_user();
         View::bind_global('auth', $this->auth);
         View::bind_global('user', $this->user);
         
-        $is_logged = $this->auth->logged_in();
-        View::bind_global('is_logged', $is_logged);
+        $isLogged = $this->auth->logged_in();
+        View::bind_global('isLogged', $isLogged);
         $this->auth_data = array(
-            'is_logged' => $is_logged
+            'isLogged' => $isLogged
         );
     }
     
     public function after()
     {
         $_script = array(
+            $this->__JS__.'jquery-1.9.1.min.js',
+            $this->__JS__.'jquery.validate.js',
+            $this->__JS__.'myScripts.js'
         );
 
         $_style = array(

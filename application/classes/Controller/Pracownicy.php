@@ -1,14 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Pracownicy extends Controller_Base {
+class Controller_Pracownicy extends Controller_Members {
 
     public function before(){
         parent::before();
-
-        # dostęp do kontrolera Pracownicy wyłącznie po zalogowaniu
-        $user = Auth::instance()->get_user(); // pobieranie danych usera
-        if (!$user) $this->redirect('/zaloguj'); // jesli nie jest zalogowany - do logowania        
     }
+
     public function action_index(){
         $modelPracownicy = new Model_Pracownicy();
         $pracownicy = $modelPracownicy->getList();
