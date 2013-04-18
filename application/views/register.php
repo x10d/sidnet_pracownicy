@@ -1,29 +1,46 @@
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#register").validate();
+		$("#registerForm").validate({
+			messages: {
+				email: {
+					required: 'Pole nie może pozostać puste',
+					email: 'Pole musi zawierać prawidłowy adres mailowy'
+				},
+				username: {
+					required: 'Pole nie może pozostać puste'
+				},
+				password: {
+					required: 'Pole nie może pozostać puste'
+				},
+				passwordchecker: {
+					required: 'Pole nie może pozostać puste'
+				}
+			}
+
+		});
 	});
 </script>
 <h2>Dodaj użytkownika</h2>
-<?php echo Form::open('', array('id' => 'register')) ?>
+<?php echo Form::open('', array('id' => 'registerForm')) ?>
 <dl>
-	<dt><label for="email">E-mail:</label></dt>
+	<dt>E-mail:</dt>
 	<dd>
 		<?php echo Form::input('email', (isset($_POST['email']))?$_POST['email']:'', array('id' => 'email', 'class' => 'required email')); ?>
 		<span style="color:red"><?php if(isset($error['email'])) echo $error['email']; ?></span>
 	</dd>
 	<dt>Imię i nazwisko:</dt>
 	<dd>
-		<?php echo Form::input('username', (isset($_POST['username']))?$_POST['username']:''); ?>
+		<?php echo Form::input('username', (isset($_POST['username']))?$_POST['username']:'', array('id' => 'username', 'class' => 'required')); ?>
 		<span style="color:red"><?php if(isset($error['username'])) echo $error['username']; ?></span>
 	</dd>
 	<dt>Hasło:</dt>
 	<dd>
-		<?php echo Form::input('password', '', array('type'=>'password')); ?>
+		<?php echo Form::input('password', '', array('id' => 'password', 'class' => 'required', 'type'=>'password')); ?>
 		<span style="color:red"><?php if(isset($error['password'])) echo $error['password']; ?></span>
 	</dd>
 	<dt>Powtórz hasło:</dt>
 	<dd>
-		<?php echo Form::input('passwordchecker', '', array('type'=>'password')); ?>
+		<?php echo Form::input('passwordchecker', '', array('id' => 'passwordchecker', 'class' => 'required', 'type'=>'password')); ?>
 		<span style="color:red"><?php if(isset($error['passwordchecker'])) echo $error['passwordchecker']; ?></span>
 	</dd>
 	<dt></dt>
