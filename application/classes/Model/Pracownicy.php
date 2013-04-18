@@ -9,14 +9,23 @@ Class Model_Pracownicy extends Kohana_Model
         return $result;
     }
     
-    public function getList()
-    {
+    public function getList($pagination) {
         $result = DB::select('*')
                     ->from('pracownicy')
+                    ->limit($pagination->items_per_page)
+                    ->offset($pagination->offset)
                     ->execute()
                     ->as_array();
         return $result;
-    }    
+    }
+
+    public function count(){
+        $result = DB::select('*')
+                    ->from('pracownicy')
+                    ->execute()
+                    ->count();
+        return $result;        
+    }
 
     public function delete($id){
 	$result = DB::delete('pracownicy')

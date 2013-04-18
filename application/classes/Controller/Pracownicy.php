@@ -8,8 +8,17 @@ class Controller_Pracownicy extends Controller_Members {
 
     public function action_index(){
         $modelPracownicy = new Model_Pracownicy();
-        $pracownicy = $modelPracownicy->getList();
-        $this->template->content = View::factory('index')->set('pracownicy',$pracownicy);
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPracownicy->count(),
+            'items_per_page' => 2,
+        ));
+
+        $pracownicy = $modelPracownicy->getList($pagination);
+        $pageLinks = $pagination->render();
+        $this->template->content = View::factory('index')
+            ->set('pracownicy',$pracownicy)
+            ->bind('pageLinks', $pageLinks);
     }    
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
