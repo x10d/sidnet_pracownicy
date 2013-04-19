@@ -11,7 +11,7 @@ class Controller_Pracownicy extends Controller_Members {
 
         $pagination = Pagination::factory(array(
             'total_items'    => $modelPracownicy->count(),
-            'items_per_page' => 2,
+            'items_per_page' => 5,
         ));
 
         $pracownicy = $modelPracownicy->getList($pagination);
