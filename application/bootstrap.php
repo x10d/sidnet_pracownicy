@@ -125,6 +125,13 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('longList', 'longList(/<page>)', array('page'=>'\d+'))
+	->defaults(array(
+		'controller' => 'pracownicy',
+		'action'     => 'longList',
+		'page'		 => '1'
+	));
+
 Route::set('login', 'zaloguj')
 	->defaults(array(
 		'controller' => 'user',

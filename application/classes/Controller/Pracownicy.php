@@ -21,6 +21,21 @@ class Controller_Pracownicy extends Controller_Members {
             ->bind('pageLinks', $pageLinks);
     }
 
+    public function action_longList(){
+        $modelPracownicy = new Model_Pracownicy();
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPracownicy->count(),
+            'items_per_page' => 50,
+        ));
+
+        $pracownicy = $modelPracownicy->getList($pagination);
+        $pageLinks = $pagination->render();
+        $this->template->content = View::factory('longList')
+            ->set('pracownicy',$pracownicy)
+            ->bind('pageLinks', $pageLinks);
+    }
+
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
