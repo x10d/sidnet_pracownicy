@@ -20,3 +20,38 @@
 </table>
 <?php echo $pageLinks ?>
 <?php echo HTML::anchor('pracownicy/add','Dodaj pracownika') ?>
+<hr>
+<table id="userListWorkersPage">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Użytkownik</td>
+            <td>Email</td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            url: "user/getUserList",
+            success : function(json_content) {
+                var parsed = jQuery.parseJSON(json_content);
+                $.each(parsed, function(key, value){
+                    $('#userListWorkersPage')
+                        .find('tbody:last')
+                        .append('<tr>'
+                            + '<td>' + value.id + '</td>'
+                            + '<td>' + value.username + '</td>'
+                            + '<td>' + value.email + '</td>'
+                            + '</tr>'
+                        );
+                });
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    })
+</script>

@@ -9,7 +9,17 @@ class Controller_Base extends Controller_Template {
     
     public function before()
     {
+/*        $this->auto_render = !$this->request->is_ajax(); 
+        if($this->auto_render === TRUE) {
+            parent::before();
+        }
+*/
         parent::before();
+        if($this->request->is_ajax()) {
+            $this->auto_render = FALSE;
+        } else {
+            $this->auto_render = TRUE;
+        }
         $this->_title = 'Sidnet - lista pracowników';
         $this->__JS__ = 'themes/assets/js/';
         $this->__CSS__= 'themes/assets/css/';
@@ -24,6 +34,7 @@ class Controller_Base extends Controller_Template {
         $this->auth_data = array(
             'isLogged' => $isLogged
         );
+
     }
     
     public function after()

@@ -19,7 +19,8 @@ class Controller_Pracownicy extends Controller_Members {
         $this->template->content = View::factory('index')
             ->set('pracownicy',$pracownicy)
             ->bind('pageLinks', $pageLinks);
-    }    
+    }
+
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
@@ -62,6 +63,7 @@ class Controller_Pracownicy extends Controller_Members {
 	$modelPracownicy->delete($id);
 	$this->redirect('/');
     }
+
     public function after(){        
         parent::after();
     }

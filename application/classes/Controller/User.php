@@ -94,6 +94,19 @@ class Controller_User extends Controller_Base {
         $this->template->content = View::factory('password')->bind('error', $error);
     }
 
+    public function action_getUserList() {
+        if ($this->request->is_ajax()) {
+            $users = ORM::factory('User')->find_all();
+            foreach($users as $user) {
+                $userList[] = array('id'=>$user->id, 'username'=>$user->username, 'email'=>$user->email);
+            }
+            $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+            $this->response->body(json_encode($userList));
+        } else {
+            die('non-ajax');
+        }
+    }
+
     public function after() {
         parent::after();
     }
