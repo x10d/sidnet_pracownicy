@@ -117,12 +117,20 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'pagination' => MODPATH.'pagination',  // Pagination module 
 	));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('longList', 'longList(/<page>)', array('page'=>'\d+'))
+	->defaults(array(
+		'controller' => 'pracownicy',
+		'action'     => 'longList',
+		'page'		 => '1'
+	));
 
 Route::set('login', 'zaloguj')
 	->defaults(array(

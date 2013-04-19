@@ -8,9 +8,34 @@ class Controller_Pracownicy extends Controller_Members {
 
     public function action_index(){
         $modelPracownicy = new Model_Pracownicy();
-        $pracownicy = $modelPracownicy->getList();
-        $this->template->content = View::factory('index')->set('pracownicy',$pracownicy);
-    }    
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPracownicy->count(),
+            'items_per_page' => 5,
+        ));
+
+        $pracownicy = $modelPracownicy->getList($pagination);
+        $pageLinks = $pagination->render();
+        $this->template->content = View::factory('index')
+            ->set('pracownicy',$pracownicy)
+            ->bind('pageLinks', $pageLinks);
+    }
+
+    public function action_longList(){
+        $modelPracownicy = new Model_Pracownicy();
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPracownicy->count(),
+            'items_per_page' => 50,
+        ));
+
+        $pracownicy = $modelPracownicy->getList($pagination);
+        $pageLinks = $pagination->render();
+        $this->template->content = View::factory('longList')
+            ->set('pracownicy',$pracownicy)
+            ->bind('pageLinks', $pageLinks);
+    }
+
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
@@ -53,6 +78,7 @@ class Controller_Pracownicy extends Controller_Members {
 	$modelPracownicy->delete($id);
 	$this->redirect('/');
     }
+
     public function after(){        
         parent::after();
     }
