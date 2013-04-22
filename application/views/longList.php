@@ -4,6 +4,7 @@ $(document).ready(function(){
 })
     
 </script>
+<IMG id="spinner" SRC="/sidnet_pracownicy/themes/assets/img/spinner.gif">
 <table id="workerLongListPage">
     <tr>
         <th>ID</th>

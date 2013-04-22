@@ -36,7 +36,12 @@ function scrollDownAjax() {
 			page = page + 1;
 	        $.ajax({
 	            url: "/sidnet_pracownicy/pracownicy/appendToLongList/?page="+page,
+	            beforeSend: function() {
+	            	$('#spinner').show();
+	            },
+
 	            success : function(json_content) {
+	            	$('#spinner').hide();
 	                var parsed = jQuery.parseJSON(json_content);
 	                $.each(parsed, function(key, value){
 	                    $('#workerLongListPage')

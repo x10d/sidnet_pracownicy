@@ -46,6 +46,7 @@ class Controller_Base extends Controller_Template {
         );
 
         $_style = array(
+            $this->__CSS__.'styles.css'
         );
 
         $this->template->header = View::factory('template/partial/header');
