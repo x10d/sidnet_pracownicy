@@ -36,6 +36,35 @@ class Controller_Pracownicy extends Controller_Members {
             ->bind('pageLinks', $pageLinks);
     }
 
+    public function action_appendToLongList(){
+        if ( ! $this->request->is_ajax()) {
+            die('non-ajax');
+        }
+
+        $modelPracownicy = new Model_Pracownicy();
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPracownicy->count(),
+            'items_per_page' => 50,
+        ));
+
+        $pracownicy = $modelPracownicy->getList($pagination);
+        $pageLinks = $pagination->render();
+
+        foreach($pracownicy as $worker) {
+            $workerList[] = array(
+                'id'=>$worker['id'],
+                'imie'=>$worker['imie'],
+                'nazwisko'=>$worker['nazwisko'],
+                'stanowisko'=>$worker['stanowisko'],
+                'pesel'=>$worker['pesel']
+            );
+        }
+        $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+        $this->response->body(json_encode($workerList));
+    }
+
+
     public function action_add(){
         $modelPracownicy = new Model_Pracownicy();
         if($this->request->post()){
