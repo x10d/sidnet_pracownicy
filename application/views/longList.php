@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
+    workersDataLoaded = false;
     scrollDownAjax();
 })
     

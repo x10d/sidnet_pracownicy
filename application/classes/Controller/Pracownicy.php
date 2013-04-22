@@ -48,20 +48,26 @@ class Controller_Pracownicy extends Controller_Members {
             'items_per_page' => 50,
         ));
 
-        $pracownicy = $modelPracownicy->getList($pagination);
-        $pageLinks = $pagination->render();
+        if ($_GET['page'] > $pagination->current_page) {
+            $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+            $this->response->body(json_encode(array('success'=>false)));
+        }else{
+            $pracownicy = $modelPracownicy->getList($pagination);
+            $pageLinks = $pagination->render();
 
-        foreach($pracownicy as $worker) {
-            $workerList[] = array(
-                'id'=>$worker['id'],
-                'imie'=>$worker['imie'],
-                'nazwisko'=>$worker['nazwisko'],
-                'stanowisko'=>$worker['stanowisko'],
-                'pesel'=>$worker['pesel']
-            );
+            foreach($pracownicy as $worker) {
+                $workerList[] = array(
+                    'id'=>$worker['id'],
+                    'imie'=>$worker['imie'],
+                    'nazwisko'=>$worker['nazwisko'],
+                    'stanowisko'=>$worker['stanowisko'],
+                    'pesel'=>$worker['pesel']
+                );
+            }
+            $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+            $this->response->body(json_encode(array('workers' => $workerList, 'success' => true)));
         }
-        $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
-        $this->response->body(json_encode($workerList));
+
     }
 
 

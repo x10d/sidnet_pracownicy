@@ -28,7 +28,7 @@ function scrollDownAjax() {
 	}
 	var isLoading = false;
 	$(window).scroll(function() {
-		if (isLoading) {
+		if (isLoading || workersDataLoaded) {
 			return;
 		}
 		if ($(window).scrollTop()+document.body.clientHeight == $(document).height()) {
@@ -41,9 +41,16 @@ function scrollDownAjax() {
 	            },
 
 	            success : function(json_content) {
+	            	var parsed = jQuery.parseJSON(json_content);
+
 	            	$('#spinner').hide();
-	                var parsed = jQuery.parseJSON(json_content);
-	                $.each(parsed, function(key, value){
+
+	            	if (!parsed.success) {
+	            		workersDataLoaded = true; // ustawienie na true, aby nie ladowac kolejnych odwolan ajaxem
+	            		return;
+	            	}
+
+	                $.each(parsed.workers, function(key, value){;
 	                    $('#workerLongListPage')
 	                        .find('tbody:last')
 	                        .append('<tr>'
@@ -58,7 +65,7 @@ function scrollDownAjax() {
 	                isLoading = false;
 	            },
 	            error: function(err) {
-	                console.log(err);
+	            	return; // no items to display
 	            }
 	        });
 		}
