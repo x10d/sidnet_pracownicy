@@ -17,6 +17,8 @@
                 <?php if(isset($header)) echo $header ?>
             </div>
             <div id = "menu">
+                    <span><?php echo HTML::anchor('/','Home') ?></span>
+                    <span><?php echo HTML::anchor('longList','Lista pracowników') ?></span>
                 <?php if (Auth::instance()->logged_in()) { ?>
                     <span><?php echo HTML::anchor('wyloguj','Wyloguj się') ?></span>
                     <span><?php echo HTML::anchor('haslo','Zmień hasło') ?></span>
