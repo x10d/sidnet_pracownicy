@@ -6,7 +6,7 @@ class Controller_Members extends Controller_Base {
         parent::before();
         # dostęp do kontrolera Pracownicy wyłącznie po zalogowaniu
         $user = Auth::instance()->get_user(); // pobieranie danych usera
-        if (!$user) $this->redirect('/zaloguj'); // jesli nie jest zalogowany - do logowania        
+        if (!$user) $this->redirect('/login'); // jesli nie jest zalogowany - do logowania        
     }
 
     public function after(){

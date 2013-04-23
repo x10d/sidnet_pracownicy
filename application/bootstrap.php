@@ -138,7 +138,7 @@ Route::set('longList', 'longList(/<page>)', array('page'=>'\d+'))
 		'page'		 => '1'
 	));
 
-Route::set('login', 'zaloguj')
+Route::set('login', 'login')
 	->defaults(array(
 		'controller' => 'user',
 		'action'     => 'login'
