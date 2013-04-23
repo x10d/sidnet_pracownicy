@@ -9,7 +9,7 @@ Class Model_Pracownicy extends Kohana_Model
         return $result;
     }
     
-    public function getList($pagination) {
+/*    public function getList($pagination) {
         $result = DB::select('*')
                     ->from('pracownicy')
                     ->limit($pagination->items_per_page)
@@ -17,6 +17,21 @@ Class Model_Pracownicy extends Kohana_Model
                     ->execute()
                     ->as_array();
         return $result;
+    }
+*/
+    public function getList($pagination) {
+        if ($result = Cache::instance('apc')->get('workerlist_'.$pagination->items_per_page.'_'.$pagination->offset)) {
+            return $result;
+        } else {
+            $result = DB::select('*')
+                ->from('pracownicy')
+                ->limit($pagination->items_per_page)
+                ->offset($pagination->offset)
+                ->execute()
+                ->as_array();
+            Cache::instance('apc')->set('workerlist_'.$pagination->items_per_page.'_'.$pagination->offset, $result);
+            return $result;
+        }
     }
 
     public function count(){
