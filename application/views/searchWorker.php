@@ -7,7 +7,7 @@ $(document).ready(function(){
     
 </script>
 
-    <?php echo Form::open('searchForm', array('id' => 'searchForm')) ?>
+    <?php echo Form::open('', array('id' => 'searchForm')) ?>
 <dl>
     <dt>Wpisz imię:</dt>
     <dd>
