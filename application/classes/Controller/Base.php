@@ -42,11 +42,13 @@ class Controller_Base extends Controller_Template {
         $_script = array(
             $this->__JS__.'jquery-1.9.1.min.js',
             $this->__JS__.'jquery.validate.js',
+            $this->__JS__.'bootstrap.js',
             $this->__JS__.'myScripts.js'
         );
 
         $_style = array(
-            $this->__CSS__.'styles.css'
+            $this->__CSS__.'bootstrap.css',
+            $this->__CSS__.'myStyles.css'
         );
 
         $this->template->header = View::factory('template/partial/header');

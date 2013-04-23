@@ -87,22 +87,22 @@ class Controller_Pracownicy extends Controller_Members {
 	$this->template->content = View::factory('add')->bind('error',$error);
     }    
     public function action_edit(){
-	$id = $this->request->param('id');
-	$modelPracownicy = new Model_Pracownicy();
-	$pracownicy = $modelPracownicy->get($id);
-	
-	if($this->request->post()){
+    	$id = $this->request->param('id');
+    	$modelPracownicy = new Model_Pracownicy();
+    	$pracownicy = $modelPracownicy->get($id);
+    	
+    	if($this->request->post()){
 
-	  $validate = $this->checkData($_POST);
+            $validate = $this->checkData($_POST);
 
             if($validate->check()){
-		$modelPracownicy->update($id,$_POST);
-		$this->redirect('/');
+                $modelPracownicy->update($id,$_POST);
+                $this->redirect('/');
             } else {
                 $error = $validate->errors('msg');
-		$pracownicy=$_POST;
+                $pracownicy=$_POST;
             }
-	}
+    	}
 	
 	$this->template->content = View::factory('edit')->set('pracownicy',$pracownicy)->bind('error',$error);
     }
@@ -113,6 +113,22 @@ class Controller_Pracownicy extends Controller_Members {
 	$modelPracownicy->delete($id);
 	$this->redirect('/');
     }
+
+    public function action_search(){
+        $this->template->content = View::factory('searchWorker');
+    }
+
+    public function action_returnAutosuggestSearchWorkers(){
+        if ( ! $this->request->is_ajax()) {
+            die('non-ajax');
+        }
+
+        $modelPracownicy = new Model_Pracownicy();
+        $searchResults = $modelPracownicy->search($_GET['searchString']);
+        $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+        $this->response->body(json_encode($searchResults));
+    }
+
 
     public function after(){        
         parent::after();

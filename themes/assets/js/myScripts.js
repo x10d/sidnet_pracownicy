@@ -71,3 +71,24 @@ function scrollDownAjax() {
 		}
 	});
 };
+
+function autosuggestSearchWorkers(searchString) {
+    $.ajax({
+        url: "/sidnet_pracownicy/pracownicy/returnAutosuggestSearchWorkers/?searchString="+searchString,
+        
+        success : function(json_content) {
+        	var parsed = jQuery.parseJSON(json_content);
+console.log(json_content);
+
+console.log(parsed);
+            var imiona = new Array();
+            $.each(parsed, function(key, value){;
+            	imiona.push(value.imie);
+            });
+			$('#searchString').typeahead({source: imiona});
+        },
+        error: function(err) {
+        	return; // no items to display
+        }
+    });
+}

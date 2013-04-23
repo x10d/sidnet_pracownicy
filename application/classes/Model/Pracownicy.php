@@ -63,4 +63,15 @@ Class Model_Pracownicy extends Kohana_Model
 
 	    return $result;
     }
+
+    public function search($searchString){
+        $result = DB::select('imie')
+            ->from('pracownicy')
+            ->where('imie', 'LIKE', '%'.$searchString.'%')
+            ->execute()
+            ->as_array();
+        
+        return $result;
+    }
+
 }

@@ -125,6 +125,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('search', 'szukaj')
+	->defaults(array(
+		'controller' => 'pracownicy',
+		'action'     => 'search'
+	));
+
 Route::set('longList', 'longList(/<page>)', array('page'=>'\d+'))
 	->defaults(array(
 		'controller' => 'pracownicy',
