@@ -119,14 +119,17 @@ class Controller_Pracownicy extends Controller_Members {
     }
 
     public function action_returnAutosuggestSearchWorkers(){
-        if ( ! $this->request->is_ajax()) {
+/*        if ( ! $this->request->is_ajax()) {
             die('non-ajax');
         }
-
+*/
         $modelPracownicy = new Model_Pracownicy();
         $searchResults = $modelPracownicy->search($_GET['searchString']);
+        foreach ($searchResults as $key => $value) {
+            $name[] = $value['imie'] . ' ' . $value['nazwisko'];
+        }
         $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
-        $this->response->body(json_encode($searchResults));
+        $this->response->body(json_encode($name));
     }
 
 

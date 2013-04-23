@@ -65,9 +65,10 @@ Class Model_Pracownicy extends Kohana_Model
     }
 
     public function search($searchString){
-        $result = DB::select('imie')
+        $result = DB::select('imie', 'nazwisko')
             ->from('pracownicy')
             ->where('imie', 'LIKE', '%'.$searchString.'%')
+            ->or_where('nazwisko', 'LIKE', '%'.$searchString.'%')
             ->execute()
             ->as_array();
         

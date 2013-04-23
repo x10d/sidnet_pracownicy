@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     <?php echo Form::open('', array('id' => 'searchForm')) ?>
 <dl>
-    <dt>Wpisz imię:</dt>
+    <dt>Wyszukaj imię, nazwisko:</dt>
     <dd>
         <?php echo Form::input('searchString', '', array(
             'id' => 'searchString',

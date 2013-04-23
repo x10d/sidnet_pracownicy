@@ -78,14 +78,13 @@ function autosuggestSearchWorkers(searchString) {
         
         success : function(json_content) {
         	var parsed = jQuery.parseJSON(json_content);
-console.log(json_content);
-
-console.log(parsed);
-            var imiona = new Array();
+            var names = new Array();
+            console.log(names);
             $.each(parsed, function(key, value){;
-            	imiona.push(value.imie);
+console.log(value);
+            	names.push(value);
             });
-			$('#searchString').typeahead({source: imiona});
+			$('#searchString').typeahead({source: names});
         },
         error: function(err) {
         	return; // no items to display
