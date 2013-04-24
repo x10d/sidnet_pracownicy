@@ -7,7 +7,7 @@
 	<th>Edycja</th>
 	<th>Usuń</th>
     </tr>
-<?php foreach($pracownicy as $key => $value): ?>
+<?php foreach ($pracownicy as $key => $value): ?>
     <tr>
         <td><?php echo $value['imie'] ?></td>
         <td><?php echo $value['nazwisko'] ?></td>

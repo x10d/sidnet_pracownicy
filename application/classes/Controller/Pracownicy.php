@@ -54,11 +54,11 @@ class Controller_Pracownicy extends Controller_Members
                 'application/json; charset=' . Kohana::$charset
             );
             $this->response->body(json_encode(array('success' => false)));
-        }else{
+        } else {
             $pracownicy = $modelPracownicy->getList($pagination);
             $pageLinks = $pagination->render();
 
-            foreach($pracownicy as $worker) {
+            foreach ($pracownicy as $worker) {
                 $workerList[] = array(
                     'id' => $worker['id'],
                     'imie' => $worker['imie'],

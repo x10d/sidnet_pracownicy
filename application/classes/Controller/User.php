@@ -99,7 +99,7 @@ class Controller_User extends Controller_Base
     public function action_getUserList() {
         if ($this->request->is_ajax()) {
             $users = ORM::factory('User')->find_all();
-            foreach($users as $user) {
+            foreach ($users as $user) {
                 $userList[] = array(
                     'id' => $user->id,
                     'username' => $user->username,
