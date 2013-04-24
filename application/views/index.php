@@ -13,13 +13,13 @@
         <td><?php echo $value['nazwisko'] ?></td>
         <td><?php echo $value['stanowisko'] ?></td>
         <td><?php echo $value['pesel'] ?></td>
-        <td><?php echo HTML::anchor('pracownicy/edit/'.$value['id'],'Edytuj') ?></td>
-        <td><?php echo HTML::anchor('pracownicy/delete/'.$value['id'],'Usuń') ?></td>
+        <td><?php echo HTML::anchor('pracownicy/edit/' . $value['id'], 'Edytuj') ?></td>
+        <td><?php echo HTML::anchor('pracownicy/delete/' . $value['id'], 'Usuń') ?></td>
     </tr>
 <?php endforeach; ?>
 </table>
 <?php echo $pageLinks ?>
-<?php echo HTML::anchor('pracownicy/add','Dodaj pracownika') ?>
+<?php echo HTML::anchor('pracownicy/add', 'Dodaj pracownika') ?>
 <hr>
 <table id="userListWorkersPage">
     <thead>
@@ -33,8 +33,8 @@
     </tbody>
 </table>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $.ajax({
+    $(document).ready(function() {
+        $.ajax( {
             url: "user/getUserList",
             success : function(json_content) {
                 var parsed = jQuery.parseJSON(json_content);
@@ -46,7 +46,7 @@
                             + '<td>' + value.username + '</td>'
                             + '<td>' + value.email + '</td>'
                             + '</tr>'
-                        );
+                    );
                 });
             },
             error: function(err) {

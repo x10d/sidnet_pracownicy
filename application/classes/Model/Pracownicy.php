@@ -2,7 +2,7 @@
 
 Class Model_Pracownicy extends Kohana_Model
 {
-    public function add($page_data){
+    public function add($page_data) {
         $result = DB::insert('pracownicy',array_keys($page_data))
             ->values($page_data)
             ->execute();        
@@ -23,27 +23,28 @@ Class Model_Pracownicy extends Kohana_Model
                 ->execute()
                 ->as_array();
             Cache::instance('apc')->set('workerlist_'.$pagination->items_per_page.'_'.$pagination->offset, $result);
+
             return $result;
         }
     }
 
-    public function count(){
+    public function count() {
         $result = DB::select('*')
             ->from('pracownicy')
             ->execute()
             ->count();
+
         return $result;        
     }
 
-    public function delete($id){
-	$result = DB::delete('pracownicy')
-		->where('id', '=', $id)
-		->execute();       
-
+    public function delete($id) {
+        $result = DB::delete('pracownicy')
+            ->where('id', '=', $id)
+            ->execute();       
         Cache::instance('apc')->delete_all();
     }
 
-    public function get($id){
+    public function get($id) {
 	    $result = DB::select('*')
     		->from('pracownicy')
     		->where('id', '=', $id)
@@ -53,7 +54,7 @@ Class Model_Pracownicy extends Kohana_Model
 	    return $result;
     }
 
-    public function update($id,$pracownicy){
+    public function update($id,$pracownicy) {
 	    $result = DB::update('pracownicy')
     		->set($pracownicy)
     		->where('id', '=', $id)
@@ -64,15 +65,14 @@ Class Model_Pracownicy extends Kohana_Model
 	    return $result;
     }
 
-    public function search($searchString){
+    public function search($searchString) {
         $result = DB::select('imie', 'nazwisko')
             ->from('pracownicy')
-            ->where('imie', 'LIKE', '%'.$searchString.'%')
-            ->or_where('nazwisko', 'LIKE', '%'.$searchString.'%')
+            ->where('imie', 'LIKE', '%' . $searchString . '%')
+            ->or_where('nazwisko', 'LIKE', '%' . $searchString . '%')
             ->execute()
             ->as_array();
         
         return $result;
     }
-
 }

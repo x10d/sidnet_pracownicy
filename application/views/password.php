@@ -9,17 +9,21 @@
 	<dt>Stare hasło:</dt>
 	<dd>
 		<?php echo Form::input('oldpassword', '', array('id' => 'oldpassword', 'class' => 'required', 'type'=>'password')); ?>
-		<span style="color:red"><?php if(isset($error['oldpassword'])) echo $error['oldpassword']; ?></span>
+		<span style="color:red">
+			<?php if (isset($error['oldpassword'])) echo $error['oldpassword']; ?>
+		</span>
 	</dd>
 	<dt>Nowe hasło:</dt>
 	<dd>
 		<?php echo Form::input('password', '', array('id' => 'password', 'class' => 'required', 'type'=>'password')); ?>
-		<span style="color:red"><?php if(isset($error['password'])) echo $error['password']; ?></span>
+		<span style="color:red">
+			<?php if (isset($error['password'])) echo $error['password']; ?>
+		</span>
 	</dd>
 	<dt>Powtórz nowe hasło:</dt>
 	<dd>
 		<?php echo Form::input('passwordchecker', '', array('id' => 'passwordchecker', 'class' => 'required', 'type'=>'password')); ?>
-		<span style="color:red"><?php if(isset($error['passwordchecker'])) echo $error['passwordchecker']; ?></span>
+		<span style="color:red"><?php if (isset($error['passwordchecker'])) echo $error['passwordchecker']; ?></span>
 	</dd>
 	<dt></dt>
 	<dd><?php echo Form::submit('submit', 'dodaj') ?></dd>

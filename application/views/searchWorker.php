@@ -1,5 +1,5 @@
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function() {
     $('#searchString').keyup(function() {
         autosuggestSearchWorkers($('#searchString').val());
     });

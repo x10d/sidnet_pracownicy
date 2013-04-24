@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
  
-class Controller_User extends Controller_Base {
- 
+class Controller_User extends Controller_Base
+{
     public function before() {
         parent::before();        
     }
@@ -41,8 +41,10 @@ class Controller_User extends Controller_Base {
                 ->rule('email', 'email')
                 ->rule('username', 'not_empty')
                 ->rule('password', 'not_empty')
-                ->rule('passwordchecker', 'matches', array(
-                    ':validation', 'passwordchecker', 'password')
+                ->rule(
+                    'passwordchecker',
+                    'matches',
+                    array(':validation', 'passwordchecker', 'password')
                 );
             if ($validate->check()) {
                 $user = ORM::factory('User');
@@ -98,9 +100,16 @@ class Controller_User extends Controller_Base {
         if ($this->request->is_ajax()) {
             $users = ORM::factory('User')->find_all();
             foreach($users as $user) {
-                $userList[] = array('id'=>$user->id, 'username'=>$user->username, 'email'=>$user->email);
+                $userList[] = array(
+                    'id' => $user->id,
+                    'username' => $user->username,
+                    'email' => $user->email
+                );
             }
-            $this->request->headers('Content-type','application/json; charset='.Kohana::$charset);
+            $this->request->headers(
+                'Content-type',
+                'application/json;charset=' . Kohana::$charset
+            );
             $this->response->body(json_encode($userList));
         } else {
             die('non-ajax');

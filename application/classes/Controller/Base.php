@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Base extends Controller_Template {
+class Controller_Base extends Controller_Template
+{
 
     public $template = 'template/template';
     protected $_title;
     protected $__JS__;
     protected $__CSS__;
     
-    public function before()
-    {
+    public function before() {
 /*        $this->auto_render = !$this->request->is_ajax(); 
         if($this->auto_render === TRUE) {
             parent::before();
@@ -22,7 +22,7 @@ class Controller_Base extends Controller_Template {
         }
         $this->_title = 'Sidnet - lista pracowników';
         $this->__JS__ = 'themes/assets/js/';
-        $this->__CSS__= 'themes/assets/css/';
+        $this->__CSS__ = 'themes/assets/css/';
 
         $this->auth = Auth::instance();
         $this->user = $this->auth->get_user();
@@ -37,18 +37,17 @@ class Controller_Base extends Controller_Template {
 
     }
     
-    public function after()
-    {
+    public function after() {
         $_script = array(
-            $this->__JS__.'jquery-1.9.1.min.js',
-            $this->__JS__.'jquery.validate.js',
-            $this->__JS__.'bootstrap.js',
-            $this->__JS__.'myScripts.js'
+            $this->__JS__ . 'jquery-1.9.1.min.js',
+            $this->__JS__ . 'jquery.validate.js',
+            $this->__JS__ . 'bootstrap.js',
+            $this->__JS__ . 'myScripts.js'
         );
 
         $_style = array(
-            $this->__CSS__.'bootstrap.css',
-            $this->__CSS__.'myStyles.css'
+            $this->__CSS__ . 'bootstrap.css',
+            $this->__CSS__ . 'myStyles.css'
         );
 
         $this->template->header = View::factory('template/partial/header');
