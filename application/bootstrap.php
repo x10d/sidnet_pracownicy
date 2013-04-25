@@ -125,6 +125,18 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('facebook', 'facebook')
+	->defaults(array(
+		'controller' => 'user',
+		'action'     => 'loginFb'
+	));
+
+Route::set('search', 'szukaj')
+	->defaults(array(
+		'controller' => 'pracownicy',
+		'action'     => 'search'
+	));
+
 Route::set('search', 'szukaj')
 	->defaults(array(
 		'controller' => 'pracownicy',
@@ -135,7 +147,7 @@ Route::set('longList', 'longList(/<page>)', array('page'=>'\d+'))
 	->defaults(array(
 		'controller' => 'pracownicy',
 		'action'     => 'longList',
-		'page'		 => '1'
+		'page'       => '1'
 	));
 
 Route::set('login', 'login')
