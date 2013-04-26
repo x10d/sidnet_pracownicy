@@ -1,8 +1,3 @@
-<script type="text/javascript">
-	$(document).ready(function() {
-		xValidateForm('#loginForm');
-	});
-</script>
 <h2>Zaloguj</h2>
 <?php echo Form::open('', array('id' => 'loginForm')) ?>
 <dl>
@@ -25,3 +20,31 @@
 </dl>
 <p>Jeśli nie posiadasz konta - <?php echo HTML::anchor('zarejestruj', 'zarejestruj się') ?>
 <?php echo Form::close() ?>
+<div class="networks">
+	<p>zaloguj się przez Facebooka</p>
+	<a href="#" class="fb">Facebook</a>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		xValidateForm('#loginForm');
+	});
+</script>
+<script src="http://connect.facebook.net/pl_PL/all.js"></script>
+<script>
+    FB.init( {
+        appId:'<?php echo Kohana::$config->load('facebook.appId') ?>', cookie:true, 
+        status:true, xfbml:true 
+    });
+
+    var utils = {
+        FBLogin : function(url){
+            FB.login(function(response) {
+                var query_string = '';
+                if (response.status == 'connected') {
+                    query_string = '?signed_request=' + response.authResponse.signedRequest + '&auth_token=' + response.authResponse.accessToken;
+                    top.location.href = url + query_string;
+                }
+            }, {scope: 'email'});
+        }
+    }
+</script>

@@ -116,6 +116,68 @@ class Controller_User extends Controller_Base
         }
     }
 
+    public function action_loginFb() {
+        $request = Arr::get($_REQUEST, 'signed_request');
+        $access_token = Arr::get($_REQUEST, 'auth_token');
+        $request = $this->_parse_fb_request($request);
+        $fb_id = arr::get($request, 'user_id');
+
+        $fb_request = Request::factory(
+                'https://graph.facebook.com/me?access_token=' . $access_token
+            )
+            ->execute();
+        $status = $fb_request->status();
+        
+        if ($status === 200) {
+            $me = $fb_request->body();
+            $me = json_decode($me, TRUE);
+            $user = ORM::factory('User')
+                ->where('email', '=', Arr::get($me, 'email'))
+                ->find();
+
+            if ($user->loaded()) {
+                if ($user->fb_id == 0) {
+                    $user->fb_id = Arr::get($me, 'id');
+                    $user->save();
+                }
+            }
+            $this->auth->force_login($user->username);
+            $this->redirect('/');
+        } else {
+            $error = 'Nie można było zalogować przez Facebook';
+            $this->template->content = View::factory('login')->bind('error', $error);
+        }
+    }
+
+    private function _parse_fb_request($signed_request) {
+        list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+        
+        $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
+        $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
+        
+        if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
+        {
+            Log::error('Unknown algorithm. Expected HMAC-SHA256');
+            error_log('Unknown algorithm. Expected HMAC-SHA256');
+            return null;
+        }
+        
+        $expected_sig = hash_hmac(
+            'sha256',
+            $payload,
+            Kohana::$config->load('facebook.secret'),
+            $raw = true
+        );
+        if ($sig !== $expected_sig)
+        {
+            Log::error('Bad Signed JSON signature!');
+            error_log('Bad Signed JSON signature!');
+            return null;
+        }
+        
+        return $data;
+    }
+
     public function after() {
         parent::after();
     }
