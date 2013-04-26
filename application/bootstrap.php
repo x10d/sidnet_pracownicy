@@ -125,6 +125,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('googleplus', 'googleplus')
+	->defaults(array(
+		'controller' => 'user',
+		'action'     => 'loginGp'
+	));
+
 Route::set('facebook', 'facebook')
 	->defaults(array(
 		'controller' => 'user',

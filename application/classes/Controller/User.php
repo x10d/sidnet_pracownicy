@@ -178,6 +178,39 @@ class Controller_User extends Controller_Base
         return $data;
     }
 
+    public function action_loginGp() {
+        $access_token = Arr::get($_REQUEST, 'auth_token');
+        $gp_request = Request::factory(
+            'https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . $access_token
+        )->execute();
+        $userinfo = $gp_request->body();
+        $status = $gp_request->status();
+        
+        if ($status === 200) {
+            $me = json_decode($userinfo, TRUE);
+            
+            $user = ORM::factory('User')
+                ->where('email', '=', Arr::get($me, 'email'))
+                ->find();
+
+            if ($user->loaded()) {
+                if ($user->gp_id == 0) {
+                    $user->gp_id = Arr::get($me, 'id');
+                    $user->save();
+                }
+            } else {
+                $user->gp_id = Arr::get($me, 'id');
+                $user->email = Arr::get($me, 'email');
+                $user->username = Arr::get($me, 'email');
+            }
+            $this->auth->force_login($user->username);
+            $this->redirect('/');
+        } else {
+            $error = 'Nie można było zalogować przez Google+';
+            $this->template->content = View::factory('login')->bind('error', $error);
+        }
+    }
+
     public function after() {
         parent::after();
     }
