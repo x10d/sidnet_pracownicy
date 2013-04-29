@@ -34,7 +34,6 @@ class Controller_Base extends Controller_Template
         $this->auth_data = array(
             'isLogged' => $isLogged
         );
-
     }
     
     public function after() {
