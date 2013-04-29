@@ -155,8 +155,7 @@ class Controller_User extends Controller_Base
         $sig = base64_decode(strtr($encoded_sig, '-_', '+/'));
         $data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
         
-        if (strtoupper($data['algorithm']) !== 'HMAC-SHA256')
-        {
+        if (strtoupper($data['algorithm']) !== 'HMAC-SHA256') {
             Log::error('Unknown algorithm. Expected HMAC-SHA256');
             error_log('Unknown algorithm. Expected HMAC-SHA256');
             return null;
@@ -168,8 +167,7 @@ class Controller_User extends Controller_Base
             Kohana::$config->load('facebook.secret'),
             $raw = true
         );
-        if ($sig !== $expected_sig)
-        {
+        if ($sig !== $expected_sig) {
             Log::error('Bad Signed JSON signature!');
             error_log('Bad Signed JSON signature!');
             return null;
