@@ -182,7 +182,7 @@ Route::set('register', 'zarejestruj')
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'pracownicy',
+		'controller' => 'welcome',
 		'action'     => 'index',
 	));
 

@@ -7,7 +7,7 @@ class Controller_Members extends Controller_Base
         # dostęp do kontrolera Pracownicy wyłącznie po zalogowaniu
         $user = Auth::instance()->get_user();
         if ( ! $user) {
-        	$this->redirect('/login');
+        	$this->redirect('/login?requestedUri=' . $this->request->uri());
         }
     }
 

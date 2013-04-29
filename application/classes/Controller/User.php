@@ -18,7 +18,7 @@ class Controller_User extends Controller_Base
                     Arr::get($this->request->post(), 'password')
                 );
                 if ($loginCheck) {
-                    $this->redirect('/');
+                    $this->redirect('/' . Arr::get($this->request->post(), 'requestedUri'));
                 } else {
                     $error['email'] = 'Login lub/i hasło niepoprawne';
                 }
@@ -26,7 +26,10 @@ class Controller_User extends Controller_Base
                 $error = $validate->errors('msg');
             }
         }
-        $this->template->content = View::factory('login')->bind('error', $error);
+        $requestedUri = $this->request->query('requestedUri');
+        $this->template->content = View::factory('login')
+            ->bind('error', $error)
+            ->bind('requestedUri', $requestedUri);
     }
 
     public function action_logout() {

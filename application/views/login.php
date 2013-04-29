@@ -1,35 +1,48 @@
-<h2>Zaloguj</h2>
-<?php echo Form::open('', array('id' => 'loginForm')) ?>
-<dl>
-	<dt>E-mail:</dt>
-	<dd>
-		<?php echo Form::input('email', (isset($_POST['email'])) ? $_POST['email'] : '', array('id' => 'email', 'class' => 'required email')); ?>
-		<span style="color:red">
-			<?php if (isset($error['email'])) echo $error['email']; ?>
-		</span>
-	</dd>
-	<dt>Hasło:</dt>
-	<dd>
-		<?php echo Form::input('password', '', array('id' => 'password', 'class' => 'required', 'type'=>'password')); ?>
-		<span style="color:red">
-			<?php if (isset($error['password'])) echo $error['password']; ?>
-		</span>
-	</dd>
-	<dt></dt>
-	<dd><?php echo Form::submit('submit', 'dodaj') ?></dd>
-</dl>
-<p>Jeśli nie posiadasz konta - <?php echo HTML::anchor('zarejestruj', 'zarejestruj się') ?>
-<?php echo Form::close() ?>
-<div class="networks">
-	<p>Zaloguj się przez Facebooka</p>
-	<a href="#" class="fb">Facebook</a>
-	<a href="#" class="gp">Google +</a>
+<div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="false">×</button>
+        <h3 id="myModalLabel">Zaloguj</h3>
+    </div>
+    <div class="modal-body">
+        <?php echo Form::open('', array('id' => 'loginForm')) ?>
+        <dl>
+            <dt>E-mail:</dt>
+            <dd>
+                <?php echo Form::input('email', (isset($_POST['email'])) ? $_POST['email'] : '', array('id' => 'email', 'class' => 'required email')); ?>
+                <span style="color:red">
+                    <?php if (isset($error['email'])) echo $error['email']; ?>
+                </span>
+            </dd>
+            <dt>Hasło:</dt>
+            <dd>
+                <?php echo Form::input('password', '', array('id' => 'password', 'class' => 'required', 'type' => 'password')); ?>
+                <span style="color:red">
+                    <?php if (isset($error['password'])) echo $error['password']; ?>
+                </span>
+            </dd>
+            <dt><?php echo Form::input('requestedUri', $requestedUri, array('type' => 'hidden')); ?></dt>
+            <dd><?php echo Form::submit('submit', 'Zaloguj się') ?></dd>
+        </dl>
+        <p>Jeśli nie posiadasz konta - <?php echo HTML::anchor('zarejestruj', 'zarejestruj się') ?>
+        <?php echo Form::close() ?>
+        <div class="networks">
+            <p>Zaloguj się przez Facebooka</p>
+            <a href="#" class="fb">Facebook</a>
+            <a href="#" class="gp">Google +</a>
+        </div>
+        <div id="fb-root"></div>
+    </div>
 </div>
-<div id="fb-root"></div>
 <script type="text/javascript">
-	$(document).ready(function() {
-		xValidateForm('#loginForm');
-	});
+    $(document).ready(function() {
+        $('#myModal').modal({
+            show : true,
+            keyboard : false,
+            backdrop : true
+        });
+
+        xValidateForm('#loginForm');
+    });
 </script>
 <script src="http://connect.facebook.net/pl_PL/all.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=init_google"></script>
@@ -74,12 +87,12 @@
         }
     }
 
-	function init_google(){
-	    window.setTimeout(function() {  
-	        utils.GPLogin(true, '');
-	        gapi.auth.init();
-	    });
-	}
+    function init_google(){
+        window.setTimeout(function() {  
+            utils.GPLogin(true, '');
+            gapi.auth.init();
+        });
+    }
 
 </script>
 

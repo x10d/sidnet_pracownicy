@@ -25,7 +25,7 @@
                     <span><?php echo HTML::anchor('haslo', 'Zmień hasło') ?></span>
                 <?php } else { ?>
                     <span>
-                        <?php echo HTML::anchor('zaloguj', 'Zaloguj się') ?>
+                        <?php echo HTML::anchor('login', 'Zaloguj się') ?>
                         <?php echo HTML::anchor('zarejestruj', 'Zarejestruj się') ?>
                     </span>
                 <?php } ?>

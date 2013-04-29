@@ -13,7 +13,7 @@
         <th>Stanowisko</th>
         <th>PESEL</th>
     </tr>
-<?php foreach ($pracownicy as ($key => $value)): ?>
+<?php foreach ($pracownicy as $key => $value): ?>
     <tr>
         <td><?php echo $value['id'] ?></td>
         <td><?php echo $value['imie'] ?></td>
