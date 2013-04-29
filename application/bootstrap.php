@@ -125,6 +125,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('masonryPix', 'masonryPix')
+	->defaults(array(
+		'controller' => 'welcome',
+		'action'     => 'masonryPix'
+	));
+
 Route::set('googleplus', 'googleplus')
 	->defaults(array(
 		'controller' => 'user',
