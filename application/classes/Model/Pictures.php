@@ -3,9 +3,11 @@
 Class Model_Pictures extends Kohana_Model
 {
     private $_arrayOfPictures = null;
+    private $_numberOfPictures = null;
 
     public function __construct() {
         $this->_arrayOfPictures = glob('themes/assets/pix/images_*.jpeg');
+        $this->_numberOfPictures = count($this->_arrayOfPictures);
     }
 
     public function getList($pagination) {
@@ -13,8 +15,8 @@ Class Model_Pictures extends Kohana_Model
         $begin = $pagination->offset;
         $end = $pagination->offset + $pagination->items_per_page;
         
-        if ($end > $this->count()) {
-            $end = $this->count();
+        if ($end > $this->_numberOfPictures) {
+            $end = $this->_numberOfPictures;
         }
 
         for ($i = $begin; $i < $end; $i++) {
@@ -29,6 +31,6 @@ Class Model_Pictures extends Kohana_Model
     }
 
     public function count() {
-        return count($this->_arrayOfPictures);
+        return $this->_numberOfPictures;
     }
 }
