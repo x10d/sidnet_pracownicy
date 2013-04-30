@@ -81,17 +81,12 @@ class Controller_User extends Controller_Base
                     'passwordchecker',
                     'matches',
                     array(':validation', 'passwordchecker', 'password')
-                );
+                )
+                ->rule('oldpassword', 'Model_User::isOldPasswordCorrect');
             if ($validate->check()) {
-                $hashedPassword = $this->auth->hash_password(
-                    Arr::get($this->request->post(), 'oldpassword')
-                );
-                if ($user->password == $hashedPassword) {
-                    $user->password = Arr::get($this->request->post(), 'password');
-                    $user->save();
-                    $this->redirect('/');                    
-                }
-                $error['oldpassword'] = 'Stare hasło nie jest poprawne';
+                $user->password = Arr::get($this->request->post(), 'password');
+                $user->save();
+                $this->redirect('/');                    
             } else {
                 $error = $validate->errors('msg');
             }
