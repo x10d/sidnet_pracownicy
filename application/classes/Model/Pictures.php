@@ -2,14 +2,17 @@
 
 Class Model_Pictures extends Kohana_Model
 {
+    private $_arrayOfPictures = null;
+
+    public function __construct() {
+        $this->_arrayOfPictures = glob('themes/assets/pix/images_*.jpeg');
+    }
 
     public function getList() {
-        $result = glob('themes/assets/pix/images_*.jpeg');
-        return $result;
+        return $this->_arrayOfPictures;
     }
-    
+
     public function count() {
-        $result = glob('themes/assets/pix/images_*.jpeg');
-        return count($result);
+        return count($this->_arrayOfPictures);
     }
 }
