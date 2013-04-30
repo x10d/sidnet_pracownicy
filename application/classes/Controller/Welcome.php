@@ -7,8 +7,8 @@ class Controller_Welcome extends Controller_Base
     }
 
 	public function action_masonryPix() {
-		$images = glob(DOCROOT . '/themes/assets/pix/images_*.jpeg', GLOB_BRACE);
-        $this->template->content = View::factory('masonryPix');
+		$pixTable = glob('themes/assets/pix/images_*.jpeg');
+        $this->template->content = View::factory('masonryPix')->bind('pixTable', $pixTable);
     }
 
 } // End Welcome

@@ -1,9 +1,10 @@
 <p>Masonry - pix</p>
 
 <div id="masonryItemContainer">
+    <?php //die(print_r($pixTable)) ?>
     <?php foreach ($pixTable as $key => $value): ?>
     <div>
-        <img id="<?php echo $key ?>" src="<?php echo DOCROOT . 'themes/assets/pix/' . $value ?>"/>
+        <img id="<?php echo $key ?>" src="<?php echo $value ?>"/>
     </div>
     <?php endforeach; ?>
 </div>
