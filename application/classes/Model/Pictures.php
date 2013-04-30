@@ -7,5 +7,9 @@ Class Model_Pictures extends Kohana_Model
         $result = glob('themes/assets/pix/images_*.jpeg');
         return $result;
     }
-
+    
+    public function count() {
+        $result = glob('themes/assets/pix/images_*.jpeg');
+        return count($result);
+    }
 }
