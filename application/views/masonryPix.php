@@ -3,7 +3,7 @@
 <div id="masonryItemContainer">
     <?php //die(print_r($pixTable)) ?>
     <?php foreach ($pixTable as $key => $value): ?>
-    <div>
+    <div class="masonryItem">
         <img id="<?php echo $key ?>" src="<?php echo $value ?>"/>
     </div>
     <?php endforeach; ?>
@@ -12,7 +12,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $(function(){
-            $('#container').masonry({
+            $('#masonryItemContainer').masonry({
                 // options
                 itemSelector : '.masonryItem',
                 columnWidth : 240
