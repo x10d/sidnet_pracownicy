@@ -1,5 +1,6 @@
 <p>Masonry - pix</p>
 
+<?php echo $pageLinks ?>
 <div id="masonryItemContainer">
     <?php foreach ($pixTable as $key => $value): ?>
     <div class="masonryItem">
@@ -7,7 +8,7 @@
     </div>
     <?php endforeach; ?>
 </div>
-
+<?php echo $pageLinks ?>
 <script type="text/javascript">
     $(document).ready(function(){
         $(function(){

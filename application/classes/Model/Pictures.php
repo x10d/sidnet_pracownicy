@@ -8,7 +8,19 @@ Class Model_Pictures extends Kohana_Model
         $this->_arrayOfPictures = glob('themes/assets/pix/images_*.jpeg');
     }
 
-    public function getList() {
+    public function getList($pagination) {
+
+        $begin = $pagination->offset;
+        $end = $pagination->offset + $pagination->items_per_page;
+
+        for ($i = $begin; $i < $end; $i++) {
+            $result[$i] = $this->_arrayOfPictures[$i];
+        }
+        
+        return $result;
+    }
+
+    public function getFullList() {
         return $this->_arrayOfPictures;
     }
 

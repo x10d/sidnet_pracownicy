@@ -9,8 +9,17 @@ class Controller_Welcome extends Controller_Base
 
     public function action_masonryPix() {
         $modelPictures = new Model_Pictures();
-        $pixTable = $modelPictures->getList();
-        $this->template->content = View::factory('masonryPix')->bind('pixTable', $pixTable);
+
+        $pagination = Pagination::factory(array(
+            'total_items'    => $modelPictures->count(),
+            'items_per_page' => 50,
+        ));
+
+        $pixTable = $modelPictures->getList($pagination);
+        $pageLinks = $pagination->render();
+        $this->template->content = View::factory('masonryPix')
+            ->set('pixTable', $pixTable)
+            ->bind('pageLinks', $pageLinks);
     }
 
 } // End Welcome
