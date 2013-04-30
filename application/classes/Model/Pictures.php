@@ -12,11 +12,15 @@ Class Model_Pictures extends Kohana_Model
 
         $begin = $pagination->offset;
         $end = $pagination->offset + $pagination->items_per_page;
+        
+        if ($end > $this->count()) {
+            $end = $this->count();
+        }
 
         for ($i = $begin; $i < $end; $i++) {
             $result[$i] = $this->_arrayOfPictures[$i];
         }
-        
+
         return $result;
     }
 
