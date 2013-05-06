@@ -30,17 +30,21 @@ Class Model_Pracownicy extends Kohana_Model
         }
     }
 
-    public function getListCalc($pagination) {
-        $pagination->total_items = 1000;
+    public function getListCalc($options, &$total_rows) {
+        $default_options = array(
+            'limit' => 20,
+            'offset' => 0
+        );
+        $options += $default_options;
         $result = DB::select(DB::expr('sql_calc_found_rows *'))
             ->from('pracownicy')
-            ->limit($pagination->items_per_page)
-            ->offset($pagination->offset)
+            ->limit($options['limit'])
+            ->offset($options['offset'])
             ->execute()
             ->as_array();
-        echo($pagination->offset);
-        $pagination->total_items = DB::select(array(DB::expr('found_rows()'), 'total_rows'))->execute()->get('total_rows');
-        echo($pagination->offset);
+        $total_rows = DB::select(array(DB::expr('found_rows()'), 'total_rows'))
+            ->execute()
+            ->get('total_rows');
         return $result;
     }
 

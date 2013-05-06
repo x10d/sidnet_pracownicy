@@ -13,9 +13,15 @@ class Controller_Pracownicy extends Controller_Members
             'items_per_page' => 5,
         ));
 
-        $pracownicy = $modelPracownicy->getListCalc($pagination);
+
+        $total = $pagination->total_items = 1000; // example value
+        $options = array(
+            'limit' => $pagination->items_per_page,
+            'offset' => $pagination->offset
+        );
+        $pracownicy = $modelPracownicy->getListCalc($options, $total);
+        $pagination->total_items = $total;
         $pageLinks = $pagination->render();
-        echo($pagination->offset);
         $this->template->content = View::factory('index')
             ->set('pracownicy', $pracownicy)
             ->bind('pageLinks', $pageLinks);
