@@ -10,12 +10,12 @@ class Controller_Pracownicy extends Controller_Members
         $modelPracownicy = new Model_Pracownicy();
 
         $pagination = Pagination::factory(array(
-            'total_items'    => $modelPracownicy->count(),
             'items_per_page' => 5,
         ));
 
-        $pracownicy = $modelPracownicy->getList($pagination);
+        $pracownicy = $modelPracownicy->getListCalc($pagination);
         $pageLinks = $pagination->render();
+        echo($pagination->offset);
         $this->template->content = View::factory('index')
             ->set('pracownicy', $pracownicy)
             ->bind('pageLinks', $pageLinks);

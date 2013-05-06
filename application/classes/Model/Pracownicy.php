@@ -30,6 +30,20 @@ Class Model_Pracownicy extends Kohana_Model
         }
     }
 
+    public function getListCalc($pagination) {
+
+        $result = DB::select(DB::expr('sql_calc_found_rows *'))
+            ->from('pracownicy')
+            ->limit($pagination->items_per_page)
+            ->offset($pagination->offset)
+            ->execute()
+            ->as_array();
+
+        $pagination->total_items = DB::select(array(DB::expr('found_rows()'), 'total_rows'))->execute()->get('total_rows');
+
+        return $result;
+    }
+
     public function count() {
         $result = DB::select('*')
             ->from('pracownicy')
