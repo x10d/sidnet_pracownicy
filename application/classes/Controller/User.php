@@ -34,13 +34,25 @@ class Controller_User extends Controller_Base
 
     public function action_loginTwitter() {
         $user = Auth::instance()->get_user();
+        //die($user->twitter_screenname);
         $twitter = Twitterauth::factory()->init();
-        if (!($user = $twitter->getUser())) {
+        if (!($twitter->getUser()->screen_name)) {
             // Not logged in or not authorize, send them to the authorize APP url
             HTTP::redirect($twitter->getAuthorizeURL());
         } else {
-            echo "<pre>";
-            print_r($user); 
+            $user = ORM::factory('User')
+                ->where('twitter_screenname', '=', $twitter->getUser()->screen_name)
+                ->find();
+
+            if ($user->loaded()) {
+                $this->auth->force_login($user->username);
+                $this->redirect('/');
+            } else {
+                $error = 'Nie można było zalogować przez Twittera';
+                $this->template->content = View::factory('login')
+                    ->set('error', $error)
+                    ->set('requestedUri', '/');
+            }
         }
     }   
 
