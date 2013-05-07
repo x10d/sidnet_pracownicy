@@ -1,6 +1,8 @@
 <h2>Edycja pracownika</h2>
 
 <?php echo Form::open() ?>
+<?php echo Form::hidden('csrf', Security::token()); ?>
+
 <dl>          
     <dt>Imię:</dt>
     <dd>

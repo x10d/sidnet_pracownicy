@@ -91,9 +91,10 @@ class Controller_Pracownicy extends Controller_Members
         if($this->request->post()){
             $validate = $this->checkData($_POST);
        
-            if($validate->check()){
-		$modelPracownicy->add($_POST);
-		$this->redirect('/');
+            if($validate->check()) {
+        		unset($_POST['csrf']);
+                $modelPracownicy->add($_POST);
+        		$this->redirect('/');
             } else {                
                 $error = $validate->errors('msg');
             }
@@ -157,16 +158,18 @@ class Controller_Pracownicy extends Controller_Members
         parent::after();
     }
 
-    public function checkData($POST)
-    {
+    public function checkData($POST) {
         $validate = new Validation($POST);
 
         $validate->rule('imie', 'not_empty') 
-                 ->rule('nazwisko', 'not_empty')
-                 ->rule('stanowisko', 'not_empty')
-                 ->rule('pesel', 'not_empty')
-                 ->rule('pesel', 'numeric')
-                 ->rule('pesel', 'exact_length', array(':value', 11));
+            ->rule('nazwisko', 'not_empty')
+            ->rule('stanowisko', 'not_empty')
+            ->rule('pesel', 'not_empty')
+            ->rule('pesel', 'numeric')
+            ->rule('pesel', 'exact_length', array(':value', 11))
+            ->rule('csrf', 'not_empty')
+            ->rule('csrf', 'Security::check');
         return $validate;
     }
 }
+
