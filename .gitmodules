@@ -1,3 +1,6 @@
 [submodule "modules/purifier"]
 	path = modules/purifier
 	url = git://github.com/shadowhand/purifier.git
+[submodule "modules/twitter-kohana"]
+	path = modules/twitter-kohana
+	url = git://github.com/pocesar/twitter-kohana.git
