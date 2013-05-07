@@ -118,6 +118,7 @@ Kohana::modules(array(
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	'pagination' => MODPATH.'pagination',  // Pagination module 
+	'purifier' => MODPATH.'purifier',  // HTML Purifier module 
 	));
 
 /**
