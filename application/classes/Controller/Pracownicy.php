@@ -82,54 +82,53 @@ class Controller_Pracownicy extends Controller_Members
                 'success' => true
             )));
         }
-
     }
 
 
     public function action_add() {
         $modelPracownicy = new Model_Pracownicy();
-        if($this->request->post()){
+        if ($this->request->post()) {
             $validate = $this->checkData($_POST);
        
-            if($validate->check()) {
-        		unset($_POST['csrf']);
+            if ($validate->check()) {
+                unset($_POST['csrf']);
                 $modelPracownicy->add($_POST);
-        		$this->redirect('/');
+                $this->redirect('/');
             } else {                
                 $error = $validate->errors('msg');
             }
 
         }
-	$this->template->content = View::factory('add')->bind('error', $error);
+        $this->template->content = View::factory('add')->bind('error', $error);
     }    
     public function action_edit() {
-    	$id = $this->request->param('id');
-    	$modelPracownicy = new Model_Pracownicy();
-    	$pracownicy = $modelPracownicy->get($id);
-    	
-    	if($this->request->post()){
+        $id = $this->request->param('id');
+        $modelPracownicy = new Model_Pracownicy();
+        $pracownicy = $modelPracownicy->get($id);
+        
+        if ($this->request->post()) {
 
             $validate = $this->checkData($_POST);
 
-            if($validate->check()){
+            if ($validate->check()) {
                 $modelPracownicy->update($id, $_POST);
                 $this->redirect('/');
             } else {
                 $error = $validate->errors('msg');
                 $pracownicy=$_POST;
             }
-    	}
-	
-	$this->template->content = View::factory('edit')
-        ->set('pracownicy',  $pracownicy)
-        ->bind('error', $error);
+        }
+    
+        $this->template->content = View::factory('edit')
+            ->set('pracownicy',  $pracownicy)
+            ->bind('error', $error);
     }
 
     public function action_delete() {     
-	$id = $this->request->param('id');
-	$modelPracownicy = new Model_Pracownicy();
-	$modelPracownicy->delete($id);
-	$this->redirect('/');
+    $id = $this->request->param('id');
+    $modelPracownicy = new Model_Pracownicy();
+    $modelPracownicy->delete($id);
+    $this->redirect('/');
     }
 
     public function action_search() {

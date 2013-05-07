@@ -8,7 +8,7 @@
 	<th>Usuń</th>
     </tr>
 <?php foreach ($pracownicy as $key => $value): ?>
-    <?php array_walk($value, function(&$n){
+    <?php array_walk($value, function(&$n) {
         $n = HTML::chars($n);
     }) ?>
     <tr>
