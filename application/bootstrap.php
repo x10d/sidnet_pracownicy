@@ -134,6 +134,18 @@ Route::set('masonryPix', 'masonryPix')
 		'action'     => 'masonryPix'
 	));
 
+Route::set('twitter-auth', 'twitter/auth')
+->defaults(array(
+	'controller' => 'MyTwitterauth',
+	'action' => 'index'
+));
+
+Route::set('twitter', 'twitter')
+	->defaults(array(
+		'controller' => 'user',
+		'action'     => 'loginTwitter'
+	));
+
 Route::set('twitter', 'twitter')
 	->defaults(array(
 		'controller' => 'user',
