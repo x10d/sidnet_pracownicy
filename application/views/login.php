@@ -29,6 +29,7 @@
             <p>Zaloguj się przez Facebooka</p>
             <a href="#" class="fb">Facebook</a>
             <a href="#" class="gp">Google +</a>
+            <a href="/sidnet_pracownicy/twitter" target="_new">Twitter</a>
         </div>
         <div id="fb-root"></div>
     </div>

@@ -102,5 +102,4 @@ $(document).ready(function(){
         utils.GPLogin(false, '/sidnet_pracownicy/googleplus');
         return false;
     });
-
 });

@@ -119,6 +119,8 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	'pagination' => MODPATH.'pagination',  // Pagination module 
 	'purifier' => MODPATH.'purifier',  // HTML Purifier module 
+	'twitterauth' => MODPATH.'twitter-kohana',  // Twitter OAuth module
+	'debug_toolbar' => MODPATH.'debug-toolbar',  // Debug toolbar module
 	));
 
 /**
@@ -130,6 +132,12 @@ Route::set('masonryPix', 'masonryPix')
 	->defaults(array(
 		'controller' => 'welcome',
 		'action'     => 'masonryPix'
+	));
+
+Route::set('twitter', 'twitter')
+	->defaults(array(
+		'controller' => 'user',
+		'action'     => 'loginTwitter'
 	));
 
 Route::set('googleplus', 'googleplus')

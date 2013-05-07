@@ -32,6 +32,18 @@ class Controller_User extends Controller_Base
             ->bind('requestedUri', $requestedUri);
     }
 
+    public function action_loginTwitter() {
+        $user = Auth::instance()->get_user();
+        $twitter = Twitterauth::factory()->init();
+        if (!($user = $twitter->getUser())) {
+            // Not logged in or not authorize, send them to the authorize APP url
+            HTTP::redirect($twitter->getAuthorizeURL());
+        } else {
+            echo "<pre>";
+            print_r($user); 
+        }
+    }   
+
     public function action_logout() {
         Auth::instance()->logout();
         $this->redirect('/');
