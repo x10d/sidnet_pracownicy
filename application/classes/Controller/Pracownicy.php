@@ -167,6 +167,7 @@ class Controller_Pracownicy extends Controller_Members
             ->rule('pesel', 'not_empty')
             ->rule('pesel', 'numeric')
             ->rule('pesel', 'exact_length', array(':value', 11))
+            ->rule('rate_per_hour', 'not_empty')
             ->rule('csrf', 'not_empty')
             ->rule('csrf', 'Security::check');
         return $validate;

@@ -36,6 +36,14 @@
     </span>
     </dd>
 
+    <dt>Stawka za godzinę:</dt>
+    <dd>
+    <?php echo Form::input('rate_per_hour', (isset($_POST['rate_per_hour'])) ? $_POST['rate_per_hour'] : '' ); ?>
+    <span style="color:red">
+        <?php if (isset($error['rate_per_hour'])) echo $error['rate_per_hour']; ?>
+    </span>
+    </dd>
+
     <dd><?php echo Form::submit('', 'dodaj') ?></dd>
 </dl>
 <?php echo Form::close() ?>

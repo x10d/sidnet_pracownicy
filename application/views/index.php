@@ -4,6 +4,7 @@
         <th>Nazwisko</th>
         <th>Stanowisko</th>
         <th>PESEL</th>
+        <th>Stawka/h</th>
 	<th>Edycja</th>
 	<th>Usuń</th>
     </tr>
@@ -16,6 +17,7 @@
         <td><?php echo $value['nazwisko'] ?></td>
         <td><?php echo $value['stanowisko'] ?></td>
         <td><?php echo $value['pesel'] ?></td>
+        <td><?php echo $value['rate_per_hour'] ?></td>
         <td><?php echo HTML::anchor('pracownicy/edit/' . $value['id'], 'Edytuj') ?></td>
         <td><?php echo HTML::anchor('pracownicy/delete/' . $value['id'], 'Usuń') ?></td>
         <td><?php echo HTML::anchor('pracownicy/addHours/' . $value['id'], 'Dodaj godziny pracy') ?></td>
