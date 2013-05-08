@@ -111,6 +111,7 @@ class Controller_Pracownicy extends Controller_Members
             $validate = $this->checkData($_POST);
 
             if ($validate->check()) {
+                unset($_POST['csrf']);
                 $modelPracownicy->update($id, $_POST);
                 $this->redirect('/');
             } else {
@@ -170,5 +171,35 @@ class Controller_Pracownicy extends Controller_Members
             ->rule('csrf', 'Security::check');
         return $validate;
     }
+
+    public function action_addHours() {
+
+        $worker_id = $this->request->param('id');
+        $modelPracownicy = new Model_Pracownicy();
+        $pracownicy = $modelPracownicy->get($worker_id);
+
+        if ($this->request->post()) {
+            $validate = new Validation($_POST);
+            $validate->rule('worker_id', 'not_empty') 
+                ->rule('worker_id', 'numeric')
+                ->rule('date', 'not_empty')
+                ->rule('date', 'date')
+                ->rule('hours', 'not_empty')
+                ->rule('hours', 'numeric')
+                ->rule('csrf', 'not_empty')
+                ->rule('csrf', 'Security::check');
+
+            if ($validate->check()) {
+                unset($_POST['csrf']);
+                $modelWorkingHours = new Model_WorkingHours();
+                $modelWorkingHours->add($_POST);
+                $this->redirect('/');
+            } else {                
+                $error = $validate->errors('msg');
+            }
+        }
+        echo($pracownicy['id']);
+        $this->template->content = View::factory('addHours')->set('worker_id', $pracownicy['id'])->bind('error', $error);
+    }    
 }
 
