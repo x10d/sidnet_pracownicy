@@ -202,7 +202,6 @@ class Controller_Pracownicy extends Controller_Members
                 $error = $validate->errors('msg');
             }
         }
-        echo($pracownicy['id']);
         $this->template->content = View::factory('addHours')->set('worker_id', $pracownicy['id'])->bind('error', $error);
     }    
 }
