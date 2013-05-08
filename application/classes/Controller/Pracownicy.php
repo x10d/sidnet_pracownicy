@@ -190,9 +190,13 @@ class Controller_Pracownicy extends Controller_Members
                 ->rule('csrf', 'Security::check');
 
             if ($validate->check()) {
-                unset($_POST['csrf']);
+                $saveVars = array(
+                    'worker_id' => $this->request->post('worker_id'),
+                    'date' => strtotime($this->request->post('date')),
+                    'hours' => $this->request->post('hours'),
+                );
                 $modelWorkingHours = new Model_WorkingHours();
-                $modelWorkingHours->add($_POST);
+                $modelWorkingHours->add($saveVars);
                 $this->redirect('/');
             } else {                
                 $error = $validate->errors('msg');
