@@ -11,6 +11,6 @@ class Controller_MyTwitterauth extends Controller_Twitterauth_Index {
 			Cookie::set(Twitterauth::$cookie_name, json_encode($token, JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG | JSON_HEX_QUOT), Date::MONTH);
 			unset($_SESSION[Twitterauth::$token_name]);
 		}
-		$this->response->body('<script>window.close();</script>');
+		#$this->response->body('<script>window.close();</script>');
 	}
 }

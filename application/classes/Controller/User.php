@@ -34,9 +34,8 @@ class Controller_User extends Controller_Base
 
     public function action_loginTwitter() {
         $user = Auth::instance()->get_user();
-        //die($user->twitter_screenname);
         $twitter = Twitterauth::factory()->init();
-        if (!($twitter->getUser()->screen_name)) {
+        if (!($twitter->getUser())) {
             // Not logged in or not authorize, send them to the authorize APP url
             HTTP::redirect($twitter->getAuthorizeURL());
         } else {
