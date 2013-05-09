@@ -5,8 +5,11 @@
         <th>Stanowisko</th>
         <th>PESEL</th>
         <th>Stawka/h</th>
-	<th>Edycja</th>
-	<th>Usuń</th>
+    	<th>Edycja</th>
+    	<th>Usuń</th>
+        <th>Godziny pracy</th>
+        <th>Zarobek miesięczny</th>
+
     </tr>
 <?php foreach ($pracownicy as $key => $value): ?>
     <?php array_walk($value, function(&$n) {
@@ -21,6 +24,7 @@
         <td><?php echo HTML::anchor('pracownicy/edit/' . $value['id'], 'Edytuj') ?></td>
         <td><?php echo HTML::anchor('pracownicy/delete/' . $value['id'], 'Usuń') ?></td>
         <td><?php echo HTML::anchor('pracownicy/addHours/' . $value['id'], 'Dodaj godziny pracy') ?></td>
+        <td><?php echo HTML::anchor('pracownicy/monthlyEarning/' . $value['id'], 'Zarobione w tym miesiącu') ?></td>
     </tr>
 <?php endforeach; ?>
 </table>

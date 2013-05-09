@@ -24,6 +24,7 @@ class Controller_Pracownicy extends Controller_Members
         $pracownicy = $modelPracownicy->getListCalc($options, $total);
         $pagination->total_items = $total;
         $pageLinks = $pagination->render();
+
         $this->template->content = View::factory('index')
             ->set('pracownicy', $pracownicy)
             ->bind('pageLinks', $pageLinks);
@@ -204,6 +205,23 @@ class Controller_Pracownicy extends Controller_Members
             }
         }
         $this->template->content = View::factory('addHours')->set('worker_id', $pracownicy['id'])->bind('error', $error);
-    }    
+    }
+
+    public function action_monthlyEarning() {
+        $worker_id = $this->request->param('id');
+        $modelPracownicy = new Model_Pracownicy();
+        $pracownicy = $modelPracownicy->get($worker_id);
+
+        $pracownicy['monthlyEarningValue'] = 0;
+        $modelWorkingHours = new Model_WorkingHours();
+        $monthlyEarning = $modelWorkingHours->getMonthlyEarning($worker_id);
+        if ($monthlyEarning) {
+            foreach ($monthlyEarning as $value) {
+                $pracownicy['monthlyEarningValue'] += $value['hours'];
+            }
+        }
+        $this->template->content = View::factory('monthlyEarning')->set('worker', $pracownicy);
+    }
+
 }
 
