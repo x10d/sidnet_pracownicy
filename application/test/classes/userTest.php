@@ -1,4 +1,15 @@
 <?php defined('SYSPATH') or die('No direct access allowed!');
+
+if (Kohana::$config->load('database.default.connection.database') != 'sidnet_kohana_unitTestingBase') {
+    die('
+
+        Wrong database error: change database to sidnet_kohana_unitTestingBase!
+
+        
+');
+}
+
+
 class FakePagination
 {
     public $items_per_page = 5;
