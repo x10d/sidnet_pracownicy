@@ -7,7 +7,13 @@ class Controller_Movies extends Controller_Base
     }
 
     public function action_search() {
-        $this->template->content = View::factory('searchMovie');
+        if ($this->request->post()) {
+            $modelMovies = New Model_Movies();
+            $movies = $modelMovies->search($this->request->post('searchString'));
+            $this->template->content = View::factory('foundAndSearchMovie')->set('movies', $movies);
+        } else {
+            $this->template->content = View::factory('searchMovie');
+        }
     }
     
     public function after() {        
