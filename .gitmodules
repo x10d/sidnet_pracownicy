@@ -4,6 +4,3 @@
 [submodule "modules/twitter-kohana"]
 	path = modules/twitter-kohana
 	url = git://github.com/pocesar/twitter-kohana.git
-[submodule "modules/sphinxql"]
-	path = modules/sphinxql
-	url = git://github.com/MasterCJ/kohana-sphinxql.git
