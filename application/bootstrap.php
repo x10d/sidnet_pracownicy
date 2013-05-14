@@ -129,6 +129,12 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+Route::set('searchMovie', 'searchMovie')
+	->defaults(array(
+		'controller' => 'movies',
+		'action'     => 'search'
+	));
+
 Route::set('masonryPix', 'masonryPix')
 	->defaults(array(
 		'controller' => 'welcome',

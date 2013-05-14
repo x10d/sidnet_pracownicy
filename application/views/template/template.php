@@ -30,6 +30,7 @@
                         <?php echo HTML::anchor('zarejestruj', 'Zarejestruj się') ?>
                     </span>
                 <?php } ?>
+                    <span><?php echo HTML::anchor('searchMovie', 'Wyszukaj film') ?></span>
             </div>
             <div id="content">
                 <?php if (isset($content)) echo $content ?>
