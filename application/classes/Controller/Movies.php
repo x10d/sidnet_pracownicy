@@ -15,6 +15,16 @@ class Controller_Movies extends Controller_Base
             $this->template->content = View::factory('searchMovie');
         }
     }
+
+    public function action_searchSphinx() {
+        if ($this->request->post()) {
+            $modelMovies = New Model_Movies();
+            $movies = $modelMovies->searchSphinx($this->request->post('searchString'));
+            $this->template->content = View::factory('foundAndSearchMovie')->set('movies', $movies);
+        } else {
+            $this->template->content = View::factory('searchMovie');
+        }
+    }
     
     public function after() {        
         parent::after();

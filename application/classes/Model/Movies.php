@@ -12,4 +12,14 @@ Class Model_Movies extends Kohana_Model
         
         return $result;
     }
+
+    public function searchSphinx($searchString) {
+        $sphinxql = new sphinxql();
+        $query = $sphinxql->new_query();
+        $query->add_field('title', 'tytul')
+            ->add_field('text', 'opis')
+            ->search($searchString);
+        $result = $query->execute();
+    }
+
 }
