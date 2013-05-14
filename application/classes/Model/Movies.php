@@ -14,7 +14,7 @@ Class Model_Movies extends Kohana_Model
     }
 
     public function searchSphinx($searchString) {
-        $sphinxql = new sphinxql();
+        $sphinxql = new SphinxQL();
         $query = $sphinxql->new_query();
         $query->add_field('title', 'tytul')
             ->add_field('text', 'opis')
