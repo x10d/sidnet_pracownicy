@@ -132,7 +132,7 @@ Kohana::modules(array(
 Route::set('searchMovie', 'searchMovie')
 	->defaults(array(
 		'controller' => 'movies',
-		'action'     => 'searchSphinx'
+		'action'     => 'search'
 	));
 
 Route::set('masonryPix', 'masonryPix')

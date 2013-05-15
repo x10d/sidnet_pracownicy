@@ -10,7 +10,7 @@
     </dd>
 </dl>
 <?php echo Form::close() ?>
-
+<p>Wyniki dla frazy: <em><?php echo $searchString ?></em></p>
 <table>
     <tr>
         <th>ID</th>

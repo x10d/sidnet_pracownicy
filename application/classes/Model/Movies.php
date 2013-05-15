@@ -14,12 +14,33 @@ Class Model_Movies extends Kohana_Model
     }
 
     public function searchSphinx($searchString) {
-        $sphinxql = new SphinxQL();
-        $query = $sphinxql->new_query();
-        $query->add_field('title', 'tytul')
-            ->add_field('text', 'opis')
-            ->search($searchString);
-        $result = $query->execute();
+        if (!$searchString) return false;
+        $getIdList = $this->getSphinxIds($searchString);
+        $result = $this->searchDb($getIdList['data']);
+        return $result;
     }
+
+
+    private function getSphinxIds($searchString) {
+        $sphinxql = new SphinxQL();
+        $result = $sphinxql->new_query()
+            ->add_index('movies')
+            ->add_field('id')
+            ->search($searchString)
+            ->execute();
+        return $result;
+    }
+
+    private function searchDb($searchIds) {
+        foreach ($searchIds as $key => $value) {
+            $result[$key] = DB::select('*')
+                ->from('movies')
+                ->where('id', '=', $value['id'])
+                ->execute()
+                ->current();
+        }
+        return $result;
+    }
+
 
 }

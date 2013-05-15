@@ -9,4 +9,7 @@
         )); ?>
     </dd>
 </dl>
+<span style="color:red">
+            <?php if(isset($error)) echo $error ?>
+</span>
 <?php echo Form::close() ?>
