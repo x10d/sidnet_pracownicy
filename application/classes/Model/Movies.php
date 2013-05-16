@@ -14,8 +14,13 @@ Class Model_Movies extends Kohana_Model
     }
 
     public function searchSphinx($searchString) {
-        if (!$searchString) return false;
+        if (!$searchString) {
+            return false;
+        }
         $getIdList = $this->getSphinxIds($searchString);
+        if ($getIdList['total'] == 0) {
+            return true;
+        }
         $result = $this->searchDb($getIdList['data']);
         return $result;
     }

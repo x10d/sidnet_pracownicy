@@ -10,7 +10,9 @@ class Controller_Movies extends Controller_Base
         if ($this->request->post()) {
             $modelMovies = New Model_Movies();
             if ($movies = $modelMovies->search($this->request->post('searchString'))) {
-                $this->template->content = View::factory('foundAndSearchMovie')->set('movies', $movies)->set('searchString', $this->request->post('searchString'));
+                $this->template->content = View::factory('foundAndSearchMovie')
+                    ->set('movies', $movies)
+                    ->set('searchString', $this->request->post('searchString'));
             } else {
                 $this->template->content = View::factory('searchMovie');
             }
@@ -23,9 +25,21 @@ class Controller_Movies extends Controller_Base
         if ($this->request->post()) {
             $modelMovies = New Model_Movies();
             if ($movies = $modelMovies->searchSphinx($this->request->post('searchString'))) {
-                $this->template->content = View::factory('foundAndSearchMovie')->set('movies', $movies)->set('searchString', $this->request->post('searchString'));
+                if (is_array($movies)) {
+                    $this->template->content = View::factory('foundAndSearchMovie')
+                        ->set('movies', $movies)
+                        ->set('searchString', $this->request->post('searchString'));
+                } else {
+                    $this->template->content = View::factory('searchMovie')
+                        ->set(
+                            'error', 'Brak wyników dla frazy <em>'
+                            . $this->request->post('searchString')
+                            . '</em>!'
+                        );
+                }
             } else {
-                $this->template->content = View::factory('searchMovie')->set('error', 'Brak wprowadzonej frazy do szukania!');
+                $this->template->content = View::factory('searchMovie')
+                    ->set('error', 'Brak wprowadzonej frazy do szukania!');
             }
         } else {
             $this->template->content = View::factory('searchMovie');
