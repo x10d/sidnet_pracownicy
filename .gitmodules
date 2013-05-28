@@ -7,3 +7,6 @@
 [submodule "modules/sphinxql"]
 	path = modules/sphinxql
 	url = git@github.com:x10d/kohana-sphinxql.git
+[submodule "modules/kohana-solr"]
+	path = modules/kohana-solr
+	url = git://github.com/x10d/kohana-solr.git
