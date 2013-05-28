@@ -25,6 +25,21 @@ Class Model_Movies extends Kohana_Model
         return $result;
     }
 
+    public function searchSolr($searchString) {
+        if (!$searchString) {
+            return false;
+        }
+        $lucene_query = '';
+        $response = Solr::instance()->search($lucene_query);
+die(var_dump($response));
+/*        $getIdList = $this->getSphinxIds($searchString);
+        if ($getIdList['total'] == 0) {
+            return true;
+        }
+        $result = $this->searchDb($getIdList['data']);
+        return $result;
+*/
+    }
 
     private function getSphinxIds($searchString) {
         $sphinxql = new SphinxQL();

@@ -46,6 +46,31 @@ class Controller_Movies extends Controller_Base
         }
     }
     
+    public function action_searchSolr() {
+        if ($this->request->post()) {
+            $modelMovies = New Model_Movies();
+            if ($movies = $modelMovies->searchSolr($this->request->post('searchString'))) {
+                if (is_array($movies)) {
+                    $this->template->content = View::factory('foundAndSearchMovieSolr')
+                        ->set('movies', $movies)
+                        ->set('searchString', $this->request->post('searchString'));
+                } else {
+                    $this->template->content = View::factory('searchMovieSolr')
+                        ->set(
+                            'error', 'Brak wyników dla frazy <em>'
+                            . $this->request->post('searchString')
+                            . '</em>!'
+                        );
+                }
+            } else {
+                $this->template->content = View::factory('searchMovieSolr')
+                    ->set('error', 'Brak wprowadzonej frazy do szukania!');
+            }
+        } else {
+            $this->template->content = View::factory('searchMovieSolr');
+        }
+    }
+
     public function after() {        
         parent::after();
     }

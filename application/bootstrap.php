@@ -122,12 +122,19 @@ Kohana::modules(array(
 	'twitterauth' => MODPATH.'twitter-kohana',  // Twitter OAuth module
 	'debug_toolbar' => MODPATH.'debug-toolbar',  // Debug toolbar module
 	'sphinxql' => MODPATH.'sphinxql', // Sphinx Search module
+	'solr' => MODPATH.'kohana-solr', // Sphinx Search module
 	));
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+
+Route::set('searchMovieSolr', 'searchMovieSolr')
+	->defaults(array(
+		'controller' => 'movies',
+		'action'     => 'searchSolr'
+	));
 
 Route::set('searchMovie', 'searchMovie')
 	->defaults(array(
