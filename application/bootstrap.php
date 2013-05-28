@@ -122,7 +122,7 @@ Kohana::modules(array(
 	'twitterauth' => MODPATH.'twitter-kohana',  // Twitter OAuth module
 	'debug_toolbar' => MODPATH.'debug-toolbar',  // Debug toolbar module
 	'sphinxql' => MODPATH.'sphinxql', // Sphinx Search module
-	'solr' => MODPATH.'kohana-solr', // Sphinx Search module
+	'solr' => MODPATH.'kohana-solr', // SolR/Lucene module
 	));
 
 /**
