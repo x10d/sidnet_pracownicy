@@ -17,20 +17,21 @@
                 <?php if (isset($header)) echo $header ?>
             </div>
             <div id="menu">
-                    <span><?php echo HTML::anchor('/', 'Home') ?></span>
-                    <span><?php echo HTML::anchor('longList', 'Lista pracowników') ?></span>
-                    <span><?php echo HTML::anchor('szukaj', 'Szukaj pracownika') ?></span>
-                    <span><?php echo HTML::anchor('masonryPix', 'Zdjęcia-Masonry') ?></span>
+                    <span><?php echo HTML::anchor('/', 'Home') ?></span> | 
+                    <span><?php echo HTML::anchor('longList', 'Lista pracowników') ?></span> | 
+                    <span><?php echo HTML::anchor('szukaj', 'Szukaj pracownika') ?></span> | 
+                    <span><?php echo HTML::anchor('masonryPix', 'Zdjęcia-Masonry') ?></span> | 
                 <?php if (Auth::instance()->logged_in()) { ?>
-                    <span><?php echo HTML::anchor('wyloguj', 'Wyloguj się') ?></span>
-                    <span><?php echo HTML::anchor('haslo', 'Zmień hasło') ?></span>
+                    <span><?php echo HTML::anchor('wyloguj', 'Wyloguj się') ?></span> | 
+                    <span><?php echo HTML::anchor('haslo', 'Zmień hasło') ?></span> | 
                 <?php } else { ?>
                     <span>
-                        <?php echo HTML::anchor('login', 'Zaloguj się') ?>
-                        <?php echo HTML::anchor('zarejestruj', 'Zarejestruj się') ?>
+                        <?php echo HTML::anchor('login', 'Zaloguj się') ?> | 
+                        <?php echo HTML::anchor('zarejestruj', 'Zarejestruj się') ?> | 
                     </span>
                 <?php } ?>
-                    <span><?php echo HTML::anchor('searchMovie', 'Wyszukaj film') ?></span>
+                    <span><?php echo HTML::anchor('searchMovie', 'Wyszukaj film Sphinxem') ?></span> | 
+                    <span><?php echo HTML::anchor('searchMovieSolr', 'Wyszukaj film SolRem') ?></span>
             </div>
             <div id="content">
                 <?php if (isset($content)) echo $content ?>
